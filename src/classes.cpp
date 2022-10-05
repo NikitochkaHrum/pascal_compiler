@@ -1,4 +1,3 @@
-#include <bits/stdc++.h>
 #include "classes.h"
 
 TextPos::TextPos(){

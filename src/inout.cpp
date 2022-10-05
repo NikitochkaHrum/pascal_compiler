@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
-#include "classes.h"
+#include "inout.h"
 
-std::vector<std::pair<std::string, TextPos>> getLexems(const char * In, const char * Out = ""){
+std::vector<std::pair<std::string, TextPos>> getLexems(const char * In, const char * Out){
     freopen(In, "r", stdin);
     if(Out!="")
         freopen(Out, "w", stdout);
@@ -39,4 +39,9 @@ std::vector<std::pair<std::string, TextPos>> getLexems(const char * In, const ch
         pos.line_number++;
     }
     return res;
+}
+
+
+int main(){
+    std:: cout << "sda";
 }
