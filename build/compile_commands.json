@@ -1,0 +1,12 @@
+[
+{
+  "directory": "/home/pna/Documents/study/pascal_compiler/build",
+  "command": "/usr/bin/g++  -I/home/pna/Documents/study/pascal_compiler/src -I/home/pna/Documents/study/pascal_compiler/include -g -o CMakeFiles/lab.dir/src/classes.cpp.o -c /home/pna/Documents/study/pascal_compiler/src/classes.cpp",
+  "file": "/home/pna/Documents/study/pascal_compiler/src/classes.cpp"
+},
+{
+  "directory": "/home/pna/Documents/study/pascal_compiler/build",
+  "command": "/usr/bin/g++  -I/home/pna/Documents/study/pascal_compiler/src -I/home/pna/Documents/study/pascal_compiler/include -g -o CMakeFiles/lab.dir/src/inout.cpp.o -c /home/pna/Documents/study/pascal_compiler/src/inout.cpp",
+  "file": "/home/pna/Documents/study/pascal_compiler/src/inout.cpp"
+}
+]

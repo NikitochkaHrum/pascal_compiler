@@ -1,4 +1,3 @@
-#include <bits/stdc++.h>
 #include "inout.h"
 
 std::vector<std::pair<std::string, TextPos>> getLexems(const char * In, const char * Out){
@@ -9,10 +8,15 @@ std::vector<std::pair<std::string, TextPos>> getLexems(const char * In, const ch
     std::string cur="", s;
     TextPos pos;
     while(getline(std::cin, s)){
+        // std::cout<< s<< '\n';
         int comment=0;
+        // for(int i = 0; i<s.length(); i++)
+        //     std::cout << s[i] << ' ';
+        // continue;
         for(int i = 0; i<s.length(); i++){
             if(comment)
                 continue;
+            // std::cout << cur << '\n';
             if(s[i]=='{'){
                 if(cur!=""){
                     res.push_back(std::make_pair(cur, pos));
@@ -25,16 +29,37 @@ std::vector<std::pair<std::string, TextPos>> getLexems(const char * In, const ch
                 comment--;
                 continue;
             }
-            if(s[i]==' ' || s[i]==';'){
+            if(s[i]==':'){
+                if(cur!=""){
+                    res.push_back(std::make_pair(cur, pos));
+                }
+                cur=":";
+                pos.char_number=i;
+                if(i<s.length()-1 && s[i+1]!='='){
+                    res.push_back(std::make_pair(std::string(1, s[i]), pos));
+                    cur="";
+                }
+                continue;
+            }
+            if(s[i]==' ' || s[i]==';' || s[i]==',' || s[i]=='\t' || s[i]=='\n' || s[i]=='(' || s[i]==')'){
                 if(cur!=""){
                     res.push_back(std::make_pair(cur, pos));
                     cur="";
                 }
-                if(s[i]==';')
-                    res.push_back(std::make_pair(";", TextPos(pos.line_number, i)));
+                // if(s[i]==',')
+                //     std::cout << std::string(1, s[i-1]) << ",\n";
+                if(s[i]!=' ' && s[i]!='\t' && s[i]!='\n')
+                    res.push_back(std::make_pair(std::string(1, s[i]), TextPos(pos.line_number, i)));
                 continue;
             }
-            
+            if(cur==""){
+                pos.char_number=i;
+            }
+            cur+=s[i];
+        }
+        if(cur!=""){
+            res.push_back(std::make_pair(cur, pos));
+            cur="";
         }
         pos.line_number++;
     }
@@ -43,5 +68,9 @@ std::vector<std::pair<std::string, TextPos>> getLexems(const char * In, const ch
 
 
 int main(){
-    std:: cout << "sda";
+    auto res = getLexems("/home/pna/Documents/study/pascal_compiler/src/input.txt");
+    for(auto a: res){
+        std::cout << a.first << '\n';
+        std::cout << a.second.line_number << ' ' << a.second.char_number << "\n\n";
+    }
 }
