@@ -10,6 +10,9 @@ TextPos::TextPos(int line_number_, int char_number_){
     char_number = char_number_;
 }
 
-bool TextPos::operator==(TextPos b){
-    return line_number==b.line_number && char_number==b.char_number;
+bool operator==(const TextPos a, const TextPos b){
+    return a.line_number==b.line_number && a.char_number==b.char_number;
+}
+bool operator!=(const TextPos a, const TextPos b){
+    return !(a==b);
 }

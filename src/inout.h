@@ -1,4 +1,3 @@
-#include <bits/stdc++.h>
 #include "classes.h"
 
 class InOutModule
@@ -14,5 +13,3 @@ private:
 };
 
 const std::pair<std::string, TextPos> END = std::make_pair("", TextPos(INT_MIN, INT_MIN));
-
-std::vector<std::pair<std::string, TextPos>> getLexems(const char * In, const char * Out = "");

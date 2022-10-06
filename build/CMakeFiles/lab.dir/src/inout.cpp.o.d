@@ -2,6 +2,7 @@ CMakeFiles/lab.dir/src/inout.cpp.o: \
  /home/pna/Documents/study/pascal_compiler/src/inout.cpp \
  /usr/include/stdc-predef.h \
  /home/pna/Documents/study/pascal_compiler/src/inout.h \
+ /home/pna/Documents/study/pascal_compiler/src/classes.h \
  /usr/include/c++/12.2.0/x86_64-pc-linux-gnu/bits/stdc++.h \
  /usr/include/c++/12.2.0/cassert \
  /usr/include/c++/12.2.0/x86_64-pc-linux-gnu/bits/c++config.h \
@@ -311,5 +312,4 @@ CMakeFiles/lab.dir/src/inout.cpp.o: \
  /usr/include/c++/12.2.0/bits/fs_ops.h /usr/include/c++/12.2.0/optional \
  /usr/include/c++/12.2.0/memory_resource \
  /usr/include/c++/12.2.0/bits/uses_allocator_args.h \
- /usr/include/c++/12.2.0/variant \
- /home/pna/Documents/study/pascal_compiler/src/classes.h
+ /usr/include/c++/12.2.0/variant
