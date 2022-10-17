@@ -80,7 +80,3 @@ CBoolVariant::CBoolVariant(bool value){
 std::string CStringVariant::ToString(){
     return value;
 }
-
-CLexer::CLexer(const char * In, const char * Out=""){
-    InOut = new InOutModule(In, Out);
-}

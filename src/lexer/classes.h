@@ -101,11 +101,3 @@ public:
     CBoolVariant(bool value);
     std::string ToString() override;
 };
-
-class CLexer
-{
-public:
-    InOutModule * InOut;
-    CLexer(const char * In, const char * Out="");
-    CToken * GetNextToken();
-};
