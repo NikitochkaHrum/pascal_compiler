@@ -96,7 +96,7 @@ std::pair<std::string, TextPos> InOutModule::GetNextLex(){
 }
 
 int main(){
-    InOutModule InOut("/home/pna/Documents/study/pascal_compiler/src/input.txt");
+    InOutModule InOut("/home/pna/Documents/study/pascal_compiler/input.txt");
     std::pair<std::string, TextPos> a=InOut.GetNextLex();
     do{
         std::cout << a.first << '\n';
