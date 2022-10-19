@@ -1,12 +1,22 @@
 [
 {
   "directory": "/home/pna/Documents/study/pascal_compiler/build",
-  "command": "/usr/bin/g++  -I/home/pna/Documents/study/pascal_compiler/src -I/home/pna/Documents/study/pascal_compiler/include -g -o CMakeFiles/lab.dir/src/classes.cpp.o -c /home/pna/Documents/study/pascal_compiler/src/classes.cpp",
-  "file": "/home/pna/Documents/study/pascal_compiler/src/classes.cpp"
+  "command": "/usr/bin/g++  -I/home/pna/Documents/study/pascal_compiler/src -I/home/pna/Documents/study/pascal_compiler/include -g -o CMakeFiles/compilier.dir/src/inout/classes.cpp.o -c /home/pna/Documents/study/pascal_compiler/src/inout/classes.cpp",
+  "file": "/home/pna/Documents/study/pascal_compiler/src/inout/classes.cpp"
 },
 {
   "directory": "/home/pna/Documents/study/pascal_compiler/build",
-  "command": "/usr/bin/g++  -I/home/pna/Documents/study/pascal_compiler/src -I/home/pna/Documents/study/pascal_compiler/include -g -o CMakeFiles/lab.dir/src/inout.cpp.o -c /home/pna/Documents/study/pascal_compiler/src/inout.cpp",
-  "file": "/home/pna/Documents/study/pascal_compiler/src/inout.cpp"
+  "command": "/usr/bin/g++  -I/home/pna/Documents/study/pascal_compiler/src -I/home/pna/Documents/study/pascal_compiler/include -g -o CMakeFiles/compilier.dir/src/inout/inout.cpp.o -c /home/pna/Documents/study/pascal_compiler/src/inout/inout.cpp",
+  "file": "/home/pna/Documents/study/pascal_compiler/src/inout/inout.cpp"
+},
+{
+  "directory": "/home/pna/Documents/study/pascal_compiler/build",
+  "command": "/usr/bin/g++  -I/home/pna/Documents/study/pascal_compiler/src -I/home/pna/Documents/study/pascal_compiler/include -g -o CMakeFiles/compilier.dir/src/lexer/classes.cpp.o -c /home/pna/Documents/study/pascal_compiler/src/lexer/classes.cpp",
+  "file": "/home/pna/Documents/study/pascal_compiler/src/lexer/classes.cpp"
+},
+{
+  "directory": "/home/pna/Documents/study/pascal_compiler/build",
+  "command": "/usr/bin/g++  -I/home/pna/Documents/study/pascal_compiler/src -I/home/pna/Documents/study/pascal_compiler/include -g -o CMakeFiles/compilier.dir/src/lexer/lexer.cpp.o -c /home/pna/Documents/study/pascal_compiler/src/lexer/lexer.cpp",
+  "file": "/home/pna/Documents/study/pascal_compiler/src/lexer/lexer.cpp"
 }
 ]

@@ -6,4 +6,7 @@ include_directories(
   ${PROJECT_SOURCE_DIR}/include
 )
 
-add_executable(lab src/classes.cpp src/inout.cpp)
+add_executable(compilier  src/inout/classes.cpp
+                          src/inout/inout.cpp
+                          src/lexer/classes.cpp
+                          src/lexer/lexer.cpp)

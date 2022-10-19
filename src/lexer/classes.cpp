@@ -6,18 +6,18 @@ CConstToken::CConstToken(TextPos position, std::string lexem){
     int x1;
     try {
         x1 = stoi(lexem);
-        value = new CIntVariant(x1);
+        value = std::make_unique<CIntVariant>(x1);
         return;
     }
     catch(std::invalid_argument& e){ }
     float x2;
     try {
         x2 = stof(lexem);
-        value = new CFloatVariant(x2);
+        value = std::make_unique<CFloatVariant>(x2);
         return;
     }
     catch(std::invalid_argument& e){ }
-    value = new CStringVariant(lexem);
+    value = std::make_unique<CStringVariant>(lexem);
 }
 
 std::string CConstToken::ToString(){

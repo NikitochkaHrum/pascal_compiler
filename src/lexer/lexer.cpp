@@ -1,9 +1,9 @@
 #include "lexer.h"
 
 CLexer::CLexer(const char * In, const char * Out){
-    InOut = new InOutModule(In, Out);
+    InOut = std::make_unique<InOutModule>(In, Out);
 }
 
-CToken * CLexer::GetNextToken(){
+CTokenPtr CLexer::GetNextToken(){
     
 }

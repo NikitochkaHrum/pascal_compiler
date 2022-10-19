@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "lab"
+			"path" : "compilier"
 		}
 	],
 	"backtrace" : 1,
@@ -60,11 +60,13 @@
 			"sourceIndexes" : 
 			[
 				0,
-				1
+				1,
+				2,
+				3
 			]
 		}
 	],
-	"id" : "lab::@6890427a1f51a3e7e1df",
+	"id" : "compilier::@6890427a1f51a3e7e1df",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -80,8 +82,8 @@
 		],
 		"language" : "CXX"
 	},
-	"name" : "lab",
-	"nameOnDisk" : "lab",
+	"name" : "compilier",
+	"nameOnDisk" : "compilier",
 	"paths" : 
 	{
 		"build" : ".",
@@ -94,7 +96,9 @@
 			"sourceIndexes" : 
 			[
 				0,
-				1
+				1,
+				2,
+				3
 			]
 		}
 	],
@@ -103,13 +107,25 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "src/classes.cpp",
+			"path" : "src/inout/classes.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "src/inout.cpp",
+			"path" : "src/inout/inout.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/lexer/classes.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/lexer/lexer.cpp",
 			"sourceGroupIndex" : 0
 		}
 	],

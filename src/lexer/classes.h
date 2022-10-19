@@ -1,6 +1,12 @@
 #pragma once
 #include "../inout/inout.h"
 
+// template<typename T, typename... Params>
+// std::unique_ptr<T> CreatePtr(Params... parameters)
+// {
+// 	return std::make_unique<T>(parameters...);
+// }
+
 enum TokenType {Constant, Identifier, KeyWord};
 enum VarType {Int, Float, String, Bool};
 enum KeyWordType {Program, Var, If, Then, Else, For, While, Do, Begin, End};
@@ -30,6 +36,7 @@ std::map<KeyWordType, std::string> from_kw_to_str {
     {End, "end"}
 };
 
+using CVariantPtr = std::unique_ptr<CVariant>;
 
 class CToken
 {
@@ -42,7 +49,7 @@ public:
 class CConstToken : public CToken
 {
 public:
-    CVariant * value;
+    std::unique_ptr<CVariant> value;
     CConstToken(TextPos position, std::string lexem);
     std::string ToString() override;
 };

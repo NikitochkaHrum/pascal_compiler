@@ -117,65 +117,113 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named lab
+# Target rules for targets named compilier
 
 # Build rule for target.
-lab: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 lab
-.PHONY : lab
+compilier: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 compilier
+.PHONY : compilier
 
 # fast build rule for target.
-lab/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/lab.dir/build.make CMakeFiles/lab.dir/build
-.PHONY : lab/fast
+compilier/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/compilier.dir/build.make CMakeFiles/compilier.dir/build
+.PHONY : compilier/fast
 
-src/classes.o: src/classes.cpp.o
-.PHONY : src/classes.o
-
-# target to build an object file
-src/classes.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/lab.dir/build.make CMakeFiles/lab.dir/src/classes.cpp.o
-.PHONY : src/classes.cpp.o
-
-src/classes.i: src/classes.cpp.i
-.PHONY : src/classes.i
-
-# target to preprocess a source file
-src/classes.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/lab.dir/build.make CMakeFiles/lab.dir/src/classes.cpp.i
-.PHONY : src/classes.cpp.i
-
-src/classes.s: src/classes.cpp.s
-.PHONY : src/classes.s
-
-# target to generate assembly for a file
-src/classes.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/lab.dir/build.make CMakeFiles/lab.dir/src/classes.cpp.s
-.PHONY : src/classes.cpp.s
-
-src/inout.o: src/inout.cpp.o
-.PHONY : src/inout.o
+src/inout/classes.o: src/inout/classes.cpp.o
+.PHONY : src/inout/classes.o
 
 # target to build an object file
-src/inout.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/lab.dir/build.make CMakeFiles/lab.dir/src/inout.cpp.o
-.PHONY : src/inout.cpp.o
+src/inout/classes.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/compilier.dir/build.make CMakeFiles/compilier.dir/src/inout/classes.cpp.o
+.PHONY : src/inout/classes.cpp.o
 
-src/inout.i: src/inout.cpp.i
-.PHONY : src/inout.i
+src/inout/classes.i: src/inout/classes.cpp.i
+.PHONY : src/inout/classes.i
 
 # target to preprocess a source file
-src/inout.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/lab.dir/build.make CMakeFiles/lab.dir/src/inout.cpp.i
-.PHONY : src/inout.cpp.i
+src/inout/classes.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/compilier.dir/build.make CMakeFiles/compilier.dir/src/inout/classes.cpp.i
+.PHONY : src/inout/classes.cpp.i
 
-src/inout.s: src/inout.cpp.s
-.PHONY : src/inout.s
+src/inout/classes.s: src/inout/classes.cpp.s
+.PHONY : src/inout/classes.s
 
 # target to generate assembly for a file
-src/inout.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/lab.dir/build.make CMakeFiles/lab.dir/src/inout.cpp.s
-.PHONY : src/inout.cpp.s
+src/inout/classes.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/compilier.dir/build.make CMakeFiles/compilier.dir/src/inout/classes.cpp.s
+.PHONY : src/inout/classes.cpp.s
+
+src/inout/inout.o: src/inout/inout.cpp.o
+.PHONY : src/inout/inout.o
+
+# target to build an object file
+src/inout/inout.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/compilier.dir/build.make CMakeFiles/compilier.dir/src/inout/inout.cpp.o
+.PHONY : src/inout/inout.cpp.o
+
+src/inout/inout.i: src/inout/inout.cpp.i
+.PHONY : src/inout/inout.i
+
+# target to preprocess a source file
+src/inout/inout.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/compilier.dir/build.make CMakeFiles/compilier.dir/src/inout/inout.cpp.i
+.PHONY : src/inout/inout.cpp.i
+
+src/inout/inout.s: src/inout/inout.cpp.s
+.PHONY : src/inout/inout.s
+
+# target to generate assembly for a file
+src/inout/inout.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/compilier.dir/build.make CMakeFiles/compilier.dir/src/inout/inout.cpp.s
+.PHONY : src/inout/inout.cpp.s
+
+src/lexer/classes.o: src/lexer/classes.cpp.o
+.PHONY : src/lexer/classes.o
+
+# target to build an object file
+src/lexer/classes.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/compilier.dir/build.make CMakeFiles/compilier.dir/src/lexer/classes.cpp.o
+.PHONY : src/lexer/classes.cpp.o
+
+src/lexer/classes.i: src/lexer/classes.cpp.i
+.PHONY : src/lexer/classes.i
+
+# target to preprocess a source file
+src/lexer/classes.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/compilier.dir/build.make CMakeFiles/compilier.dir/src/lexer/classes.cpp.i
+.PHONY : src/lexer/classes.cpp.i
+
+src/lexer/classes.s: src/lexer/classes.cpp.s
+.PHONY : src/lexer/classes.s
+
+# target to generate assembly for a file
+src/lexer/classes.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/compilier.dir/build.make CMakeFiles/compilier.dir/src/lexer/classes.cpp.s
+.PHONY : src/lexer/classes.cpp.s
+
+src/lexer/lexer.o: src/lexer/lexer.cpp.o
+.PHONY : src/lexer/lexer.o
+
+# target to build an object file
+src/lexer/lexer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/compilier.dir/build.make CMakeFiles/compilier.dir/src/lexer/lexer.cpp.o
+.PHONY : src/lexer/lexer.cpp.o
+
+src/lexer/lexer.i: src/lexer/lexer.cpp.i
+.PHONY : src/lexer/lexer.i
+
+# target to preprocess a source file
+src/lexer/lexer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/compilier.dir/build.make CMakeFiles/compilier.dir/src/lexer/lexer.cpp.i
+.PHONY : src/lexer/lexer.cpp.i
+
+src/lexer/lexer.s: src/lexer/lexer.cpp.s
+.PHONY : src/lexer/lexer.s
+
+# target to generate assembly for a file
+src/lexer/lexer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/compilier.dir/build.make CMakeFiles/compilier.dir/src/lexer/lexer.cpp.s
+.PHONY : src/lexer/lexer.cpp.s
 
 # Help Target
 help:
@@ -185,13 +233,19 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... lab"
-	@echo "... src/classes.o"
-	@echo "... src/classes.i"
-	@echo "... src/classes.s"
-	@echo "... src/inout.o"
-	@echo "... src/inout.i"
-	@echo "... src/inout.s"
+	@echo "... compilier"
+	@echo "... src/inout/classes.o"
+	@echo "... src/inout/classes.i"
+	@echo "... src/inout/classes.s"
+	@echo "... src/inout/inout.o"
+	@echo "... src/inout/inout.i"
+	@echo "... src/inout/inout.s"
+	@echo "... src/lexer/classes.o"
+	@echo "... src/lexer/classes.i"
+	@echo "... src/lexer/classes.s"
+	@echo "... src/lexer/lexer.o"
+	@echo "... src/lexer/lexer.i"
+	@echo "... src/lexer/lexer.s"
 .PHONY : help
 
 
