@@ -13,4 +13,4 @@ private:
     int idx, comment;
 };
 
-const std::pair<std::string, TextPos> END = std::make_pair("", TextPos(INT_MIN, INT_MIN));
+const std::pair<std::string, TextPos> END_LEXEMS = std::make_pair("", TextPos(INT_MIN, INT_MIN));

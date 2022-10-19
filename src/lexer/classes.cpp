@@ -1,5 +1,72 @@
 #include "classes.h"
 
+std::map<std::string, OperatorType> from_str_to_operator = {
+    {"+", OType1},
+    {"-", OType2},
+    {"*", OType3},
+    {"/", OType4},
+    {"mod", OType5},
+    {"div", OType6},
+    {"=", OType7},
+    {":=", OType8},
+    {":", OType9},
+    {";", OType10},
+    {",", OType11}
+};
+
+std::map<OperatorType, std::string> from_operator_to_str = {
+    {OType1, "+"},
+    {OType2, "-"},
+    {OType3, "*"},
+    {OType4, "/"},
+    {OType5, "mod"},
+    {OType6, "div"},
+    {OType7, "="},
+    {OType8, ":="},
+    {OType9, ":"},
+    {OType10, ";"},
+    {OType11, ","}
+};
+
+std::map<std::string, KeyWordType> from_str_to_kw = {
+    {"program", Program},
+    {"var", Var},
+    {"if", If},
+    {"then", Then},
+    {"else", Else},
+    {"for", For},
+    {"while", While},
+    {"do", Do},
+    {"begin", Begin},
+    {"end", End}
+};
+
+std::map<KeyWordType, std::string> from_kw_to_str = {
+    {Program, "program"},
+    {Var, "var"},
+    {If, "if"},
+    {Then, "then"},
+    {Else, "else"},
+    {For, "for"},
+    {While, "while"},
+    {Do, "do"},
+    {Begin, "begin"},
+    {End, "end"}
+};
+
+
+std::string make_low(std::string a){
+    std::transform(a.begin(), a.end(), a.begin(), [](unsigned char c){ return std::tolower(c); });
+    return a;
+}
+
+CToken::CToken(){
+    TextPos help;
+    pos.char_number = help.char_number;
+    pos.line_number = help.line_number;
+    tt = Constant;
+}
+
 CConstToken::CConstToken(TextPos position, std::string lexem){
     tt = Constant;
     pos = position;
@@ -17,7 +84,14 @@ CConstToken::CConstToken(TextPos position, std::string lexem){
         return;
     }
     catch(std::invalid_argument& e){ }
-    value = std::make_unique<CStringVariant>(lexem);
+
+    std::string help = make_low(lexem);
+    if(help=="true" || help=="false"){
+        bool what = help=="true";
+        value = std::make_unique<CBoolVariant>(what);
+    }
+    else
+        value = std::make_unique<CStringVariant>(lexem);
 }
 
 std::string CConstToken::ToString(){
@@ -27,7 +101,7 @@ std::string CConstToken::ToString(){
 CIdentToken::CIdentToken(TextPos position, std::string lexem){
     tt = Identifier;
     pos = position;
-    value=lexem;
+    value = lexem;
 }
 std::string CIdentToken::ToString(){
     return value;
@@ -36,47 +110,58 @@ std::string CIdentToken::ToString(){
 CKeyWordToken::CKeyWordToken(TextPos position, std::string lexem){
     tt = KeyWord;
     pos = position;
-    std::string help = lexem;
-    std::transform(help.begin(), help.end(), help.begin(), [](unsigned char c){ return std::tolower(c); });
-    value = from_str_to_kw[help];
+    value = from_str_to_kw[make_low(lexem)];
 }
 
 std::string CKeyWordToken::ToString(){
     return from_kw_to_str[value];
 }
 
-CIntVariant::CIntVariant(int value){
-    this->value=value;
+COperatorToken::COperatorToken(TextPos position, std::string lexem){
+    tt = Operator;
+    pos = position;
+    value = from_str_to_operator[make_low(lexem)];
+}
+
+std::string COperatorToken::ToString(){
+    return from_operator_to_str[value];
+}
+
+CVariant::CVariant(){
+    vt = String;
+}
+
+CIntVariant::CIntVariant(int source){
+    this->source = source;
     vt = Int;
 }
 
 std::string CIntVariant::ToString(){
-    return std::to_string(value);
+    return std::to_string(source);
 }
 
-CFloatVariant::CFloatVariant(float value){
-    this->value=value;
+CFloatVariant::CFloatVariant(float source){
+    this->source = source;
     vt = Float;
 }
 
 std::string CFloatVariant::ToString(){
-    return std::to_string(value);
+    return std::to_string(source);
 }
 
-CStringVariant::CStringVariant(std::string value){
-    this->value=value;
+CStringVariant::CStringVariant(std::string source){
+    this->source = source;
     vt = String;
 }
 
 std::string CStringVariant::ToString(){
-    return value;
+    return source;
 }
-
-CBoolVariant::CBoolVariant(bool value){
-    this->value=value;
+CBoolVariant::CBoolVariant(bool source){
+    this->source = source;
     vt = Bool;
 }
 
-std::string CStringVariant::ToString(){
-    return value;
+std::string CBoolVariant::ToString(){
+    return source ? "true" : "false";
 }

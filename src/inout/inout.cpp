@@ -15,7 +15,7 @@ InOutModule::InOutModule(const char * In, const char * Out){
 std::pair<std::string, TextPos> InOutModule::GetNextLex(){
     if(!ready){
         // throw EOF flag
-        return END;
+        return END_LEXEMS;
     }
     for(; idx<s.length(); idx++){
         if(s[idx]=='{'){
@@ -102,5 +102,5 @@ int main(){
         std::cout << a.first << '\n';
         std::cout << a.second.line_number << ' ' << a.second.char_number << "\n\n";
         a=InOut.GetNextLex();
-    }while(a!=END);
+    }while(a!=END_LEXEMS);
 }

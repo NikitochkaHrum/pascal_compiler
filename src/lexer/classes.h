@@ -7,43 +7,27 @@
 // 	return std::make_unique<T>(parameters...);
 // }
 
-enum TokenType {Constant, Identifier, KeyWord};
+enum TokenType {Constant, Identifier, KeyWord, Operator};
 enum VarType {Int, Float, String, Bool};
 enum KeyWordType {Program, Var, If, Then, Else, For, While, Do, Begin, End};
-std::map<std::string, KeyWordType> from_str_to_kw {
-    {"program", Program},
-    {"var", Var},
-    {"if", If},
-    {"then", Then},
-    {"else", Else},
-    {"for", For},
-    {"while", While},
-    {"do", Do},
-    {"begin", Begin},
-    {"end", End}
-};
+enum OperatorType {OType1, OType2, OType3, OType4, OType5, OType6, OType7, OType8, OType9, OType10, OType11};
 
-std::map<KeyWordType, std::string> from_kw_to_str {
-    {Program, "program"},
-    {Var, "var"},
-    {If, "if"},
-    {Then, "then"},
-    {Else, "else"},
-    {For, "for"},
-    {While, "while"},
-    {Do, "do"},
-    {Begin, "begin"},
-    {End, "end"}
-};
+extern std::map<std::string, OperatorType> from_str_to_operator;
+extern std::map<OperatorType, std::string> from_operator_to_str;
+extern std::map<std::string, KeyWordType> from_str_to_kw;
+extern std::map<KeyWordType, std::string> from_kw_to_str;
 
-using CVariantPtr = std::unique_ptr<CVariant>;
+std::string make_low(std::string a);
+
+class CVariant;
 
 class CToken
 {
 public:
     TokenType tt;
     TextPos pos;
-    virtual std::string ToString();
+    CToken();
+    virtual std::string ToString() = 0;
 };
 
 class CConstToken : public CToken
@@ -70,41 +54,49 @@ public:
     std::string ToString() override;
 };
 
+class COperatorToken : public CToken
+{
+    OperatorType value;
+    COperatorToken(TextPos position, std::string lexem);
+    std::string ToString() override;
+};
+
 class CVariant
 {
 public:
     VarType vt;
-    virtual std::string ToString();
+    CVariant();
+    virtual std::string ToString() = 0;
 };
 
 class CIntVariant : public CVariant
 {
 public:
-    int value;
-    CIntVariant(int value);
+    int source;
+    CIntVariant(int source);
     std::string ToString() override;
 };
 
 class CFloatVariant : public CVariant
 {
 public:
-    float value;
-    CFloatVariant(float value);
+    float source;
+    CFloatVariant(float source);
     std::string ToString() override;
 };
 
 class CStringVariant : public CVariant
 {
 public:
-    std::string value;
-    CStringVariant(std::string value);
+    std::string source;
+    CStringVariant(std::string source);
     std::string ToString() override;
 };
 
 class CBoolVariant : public CVariant
 {
 public:
-    bool value;
-    CBoolVariant(bool value);
+    bool source;
+    CBoolVariant(bool source);
     std::string ToString() override;
 };
