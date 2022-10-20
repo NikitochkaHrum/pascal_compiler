@@ -94,13 +94,3 @@ std::pair<std::string, TextPos> InOutModule::GetNextLex(){
         return ans;
     return this->GetNextLex();
 }
-
-int main(){
-    InOutModule InOut("/home/pna/Documents/study/pascal_compiler/input.txt");
-    std::pair<std::string, TextPos> a=InOut.GetNextLex();
-    do{
-        std::cout << a.first << '\n';
-        std::cout << a.second.line_number << ' ' << a.second.char_number << "\n\n";
-        a=InOut.GetNextLex();
-    }while(a!=END_LEXEMS);
-}

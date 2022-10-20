@@ -11,7 +11,10 @@ std::map<std::string, OperatorType> from_str_to_operator = {
     {":=", OType8},
     {":", OType9},
     {";", OType10},
-    {",", OType11}
+    {",", OType11},
+    {"(", OType12},
+    {")", OType13},
+    {".", OType14}
 };
 
 std::map<OperatorType, std::string> from_operator_to_str = {
@@ -25,7 +28,10 @@ std::map<OperatorType, std::string> from_operator_to_str = {
     {OType8, ":="},
     {OType9, ":"},
     {OType10, ";"},
-    {OType11, ","}
+    {OType11, ","},
+    {OType12, "("},
+    {OType13, ")"},
+    {OType14, "."}
 };
 
 std::map<std::string, KeyWordType> from_str_to_kw = {
@@ -38,7 +44,13 @@ std::map<std::string, KeyWordType> from_str_to_kw = {
     {"while", While},
     {"do", Do},
     {"begin", Begin},
-    {"end", End}
+    {"end", End},
+    {"read", Read},
+    {"write", Write},
+    {"integer", Integer},
+    {"float", Float},
+    {"readln", Readln},
+    {"writeln", Writeln}
 };
 
 std::map<KeyWordType, std::string> from_kw_to_str = {
@@ -51,7 +63,13 @@ std::map<KeyWordType, std::string> from_kw_to_str = {
     {While, "while"},
     {Do, "do"},
     {Begin, "begin"},
-    {End, "end"}
+    {End, "end"},
+    {Read, "read"},
+    {Write, "write"},
+    {Integer, "integer"},
+    {Float, "float"},
+    {Readln, "readln"},
+    {Writeln, "writeln"}
 };
 
 
@@ -128,12 +146,12 @@ std::string COperatorToken::ToString(){
 }
 
 CVariant::CVariant(){
-    vt = String;
+    vt = StringType;
 }
 
 CIntVariant::CIntVariant(int source){
     this->source = source;
-    vt = Int;
+    vt = IntegerType;
 }
 
 std::string CIntVariant::ToString(){
@@ -142,7 +160,7 @@ std::string CIntVariant::ToString(){
 
 CFloatVariant::CFloatVariant(float source){
     this->source = source;
-    vt = Float;
+    vt = FloatType;
 }
 
 std::string CFloatVariant::ToString(){
@@ -151,7 +169,7 @@ std::string CFloatVariant::ToString(){
 
 CStringVariant::CStringVariant(std::string source){
     this->source = source;
-    vt = String;
+    vt = StringType;
 }
 
 std::string CStringVariant::ToString(){
@@ -159,7 +177,7 @@ std::string CStringVariant::ToString(){
 }
 CBoolVariant::CBoolVariant(bool source){
     this->source = source;
-    vt = Bool;
+    vt = BoolType;
 }
 
 std::string CBoolVariant::ToString(){

@@ -32,3 +32,55 @@ std::unique_ptr<CToken> CLexer::GetNextToken(){
         return std::make_unique<CIdentToken>(lexem.second, lexem.first);
     return std::make_unique<CConstToken>(lexem.second, lexem.first);
 }
+
+int main(){
+    auto Lexer = std::make_unique<CLexer>("/home/pna/Documents/study/pascal_compiler/input.txt", "/home/pna/Documents/study/pascal_compiler/output.txt");
+    
+    auto t = Lexer->GetNextToken();
+    while(t){
+        switch(t->tt){
+            case Constant:{
+                std::cout << t->ToString() << '\n';
+                std::cout << "\tConstant on pos " << t->pos.line_number << ' ' << t->pos.char_number << '\n';
+                std::cout << "\tVar Type = ";
+                auto help = static_cast<CConstToken*>(t.get());
+                switch (help->value->vt){
+                case IntegerType:{
+                    std::cout << "Int\n";
+                    break;
+                }
+                case FloatType:{
+                    std::cout << "Float\n";
+                    break;
+                }
+                case StringType:{
+                    std::cout << "Int\n";
+                    break;
+                }
+                case BoolType:{
+                    std::cout << "Bool\n";
+                    break;
+                }
+                }
+                std::cout << '\n';
+                break;
+            }
+            case Identifier:{
+                std::cout << t->ToString() << '\n';
+                std::cout << "\tIdentifier on pos " << t->pos.line_number << ' ' << t->pos.char_number << "\n\n";
+                break;
+            }
+            case KeyWord:{
+                std::cout << t->ToString() << '\n';
+                std::cout << "\tKeyWord on pos " << t->pos.line_number << ' ' << t->pos.char_number << "\n\n";
+                break;
+            }
+            case Operator:{
+                std::cout << t->ToString() << '\n';
+                std::cout << "\tOperator on pos " << t->pos.line_number << ' ' << t->pos.char_number << "\n\n";
+                break;
+            }
+        }
+        t = Lexer->GetNextToken();
+    }
+}
