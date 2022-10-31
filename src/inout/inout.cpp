@@ -46,6 +46,8 @@ std::pair<std::string, TextPos> InOutModule::GetNextLex(){
                 idx++;
                 return ans;
             }
+            cur+=s[idx];
+            continue;
         }
         if(s[idx]==':'){
             if(cur!=""){

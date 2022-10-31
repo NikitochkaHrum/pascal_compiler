@@ -9,7 +9,7 @@
 
 enum TokenType {Constant, Identifier, KeyWord, Operator};
 enum VarType {IntegerType, FloatType, StringType, BoolType};
-enum KeyWordType {Program, Var, If, Then, Else, For, While, Do, Begin, End, Read, Write, Integer, Float, Readln, Writeln};
+enum KeyWordType {ProgramKW, VarKW, IfKW, ThenKW, ElseKW, ForKW, WhileKW, DoKW, BeginKW, EndKW, ReadKW, WriteKW, IntegerKW, FloatKW, ReadlnKW, WritelnKW};
 enum OperatorType {OType1, OType2, OType3, OType4, OType5, OType6, OType7, OType8, OType9, OType10, OType11, OType12, OType13, OType14};
 
 extern std::map<std::string, OperatorType> from_str_to_operator;

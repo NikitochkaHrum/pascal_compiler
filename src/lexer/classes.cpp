@@ -35,41 +35,41 @@ std::map<OperatorType, std::string> from_operator_to_str = {
 };
 
 std::map<std::string, KeyWordType> from_str_to_kw = {
-    {"program", Program},
-    {"var", Var},
-    {"if", If},
-    {"then", Then},
-    {"else", Else},
-    {"for", For},
-    {"while", While},
-    {"do", Do},
-    {"begin", Begin},
-    {"end", End},
-    {"read", Read},
-    {"write", Write},
-    {"integer", Integer},
-    {"float", Float},
-    {"readln", Readln},
-    {"writeln", Writeln}
+    {"Program", ProgramKW},
+    {"var", VarKW},
+    {"if", IfKW},
+    {"then", ThenKW},
+    {"else", ElseKW},
+    {"for", ForKW},
+    {"while", WhileKW},
+    {"do", DoKW},
+    {"begin", BeginKW},
+    {"end", EndKW},
+    {"read", ReadKW},
+    {"write", WriteKW},
+    {"integer", IntegerKW},
+    {"float", FloatKW},
+    {"readln", ReadlnKW},
+    {"writeln", WritelnKW}
 };
 
 std::map<KeyWordType, std::string> from_kw_to_str = {
-    {Program, "program"},
-    {Var, "var"},
-    {If, "if"},
-    {Then, "then"},
-    {Else, "else"},
-    {For, "for"},
-    {While, "while"},
-    {Do, "do"},
-    {Begin, "begin"},
-    {End, "end"},
-    {Read, "read"},
-    {Write, "write"},
-    {Integer, "integer"},
-    {Float, "float"},
-    {Readln, "readln"},
-    {Writeln, "writeln"}
+    {ProgramKW, "Program"},
+    {VarKW, "var"},
+    {IfKW, "if"},
+    {ThenKW, "then"},
+    {ElseKW, "else"},
+    {ForKW, "for"},
+    {WhileKW, "while"},
+    {DoKW, "do"},
+    {BeginKW, "begin"},
+    {EndKW, "end"},
+    {ReadKW, "read"},
+    {WriteKW, "write"},
+    {IntegerKW, "integer"},
+    {FloatKW, "float"},
+    {ReadlnKW, "readln"},
+    {WritelnKW, "writeln"}
 };
 
 
@@ -89,12 +89,6 @@ CConstToken::CConstToken(TextPos position, std::string lexem){
     tt = Constant;
     pos = position;
     int x1;
-    try {
-        x1 = stoi(lexem);
-        value = std::make_unique<CIntVariant>(x1);
-        return;
-    }
-    catch(std::invalid_argument& e){ }
     float x2;
     try {
         x2 = stof(lexem);
@@ -102,7 +96,12 @@ CConstToken::CConstToken(TextPos position, std::string lexem){
         return;
     }
     catch(std::invalid_argument& e){ }
-
+    try {
+        x1 = stoi(lexem);
+        value = std::make_unique<CIntVariant>(x1);
+        return;
+    }
+    catch(std::invalid_argument& e){ }
     std::string help = make_low(lexem);
     if(help=="true" || help=="false"){
         bool what = help=="true";
