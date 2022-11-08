@@ -39,8 +39,8 @@ int main(){
     auto t = Lexer->GetNextToken();
     while(t){
         switch(t->tt){
+            std::cout << t->ToString() << '\n';
             case Constant:{
-                std::cout << t->ToString() << '\n';
                 std::cout << "\tConstant on pos " << t->pos.line_number << ' ' << t->pos.char_number << '\n';
                 std::cout << "\tVar Type = ";
                 auto help = static_cast<CConstToken*>(t.get());
@@ -62,21 +62,19 @@ int main(){
                     break;
                 }
                 }
+                delete help;
                 std::cout << '\n';
                 break;
             }
             case Identifier:{
-                std::cout << t->ToString() << '\n';
                 std::cout << "\tIdentifier on pos " << t->pos.line_number << ' ' << t->pos.char_number << "\n\n";
                 break;
             }
             case KeyWord:{
-                std::cout << t->ToString() << '\n';
                 std::cout << "\tKeyWord on pos " << t->pos.line_number << ' ' << t->pos.char_number << "\n\n";
                 break;
             }
             case Operator:{
-                std::cout << t->ToString() << '\n';
                 std::cout << "\tOperator on pos " << t->pos.line_number << ' ' << t->pos.char_number << "\n\n";
                 break;
             }
