@@ -11,4 +11,5 @@ private:
 public:
     CCompilier(const char * In, const char * Out="");
     void Accept(std::unique_ptr<CToken> expected_token);
+    void ProgramBlock();
 };

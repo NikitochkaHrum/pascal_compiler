@@ -85,6 +85,10 @@ CToken::CToken(){
     tt = Constant;
 }
 
+CConstToken::CConstToken(std::string lexem){
+    CConstToken(TextPos(), lexem);
+}
+
 CConstToken::CConstToken(TextPos position, std::string lexem){
     tt = Constant;
     pos = position;
@@ -115,13 +119,22 @@ std::string CConstToken::ToString(){
     return value->ToString();
 }
 
+CIdentToken::CIdentToken(std::string lexem){
+    CIdentToken(TextPos(), lexem);
+}
+
 CIdentToken::CIdentToken(TextPos position, std::string lexem){
     tt = Identifier;
     pos = position;
     value = lexem;
 }
+
 std::string CIdentToken::ToString(){
     return value;
+}
+
+CKeyWordToken::CKeyWordToken(std::string lexem){
+    CKeyWordToken(TextPos(), lexem);
 }
 
 CKeyWordToken::CKeyWordToken(TextPos position, std::string lexem){
@@ -132,6 +145,10 @@ CKeyWordToken::CKeyWordToken(TextPos position, std::string lexem){
 
 std::string CKeyWordToken::ToString(){
     return from_kw_to_str[value];
+}
+
+COperatorToken::COperatorToken(std::string lexem){
+    COperatorToken(TextPos(), lexem);
 }
 
 COperatorToken::COperatorToken(TextPos position, std::string lexem){

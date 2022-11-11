@@ -34,6 +34,7 @@ class CConstToken : public CToken
 {
 public:
     std::unique_ptr<CVariant> value;
+    CConstToken(std::string lexem);
     CConstToken(TextPos position, std::string lexem);
     std::string ToString() override;
 };
@@ -42,6 +43,7 @@ class CIdentToken : public CToken
 {
 public:
     std::string value;
+    CIdentToken(std::string lexem);
     CIdentToken(TextPos position, std::string lexem);
     std::string ToString() override;
 };
@@ -50,6 +52,7 @@ class CKeyWordToken : public CToken
 {
 public:
     KeyWordType value;
+    CKeyWordToken(std::string lexem);
     CKeyWordToken(TextPos position, std::string lexem);
     std::string ToString() override;
 };
@@ -58,6 +61,7 @@ class COperatorToken : public CToken
 {
 public:
     OperatorType value;
+    COperatorToken(std::string lexem);
     COperatorToken(TextPos position, std::string lexem);
     std::string ToString() override;
 };
