@@ -11,6 +11,11 @@
 },
 {
   "directory": "/home/pna/Documents/study/pascal_compiler/build",
+  "command": "/usr/bin/g++  -I/home/pna/Documents/study/pascal_compiler/src -I/home/pna/Documents/study/pascal_compiler/include -g -o CMakeFiles/compilier.dir/src/exceptions/exceptions.cpp.o -c /home/pna/Documents/study/pascal_compiler/src/exceptions/exceptions.cpp",
+  "file": "/home/pna/Documents/study/pascal_compiler/src/exceptions/exceptions.cpp"
+},
+{
+  "directory": "/home/pna/Documents/study/pascal_compiler/build",
   "command": "/usr/bin/g++  -I/home/pna/Documents/study/pascal_compiler/src -I/home/pna/Documents/study/pascal_compiler/include -g -o CMakeFiles/compilier.dir/src/lexer/classes.cpp.o -c /home/pna/Documents/study/pascal_compiler/src/lexer/classes.cpp",
   "file": "/home/pna/Documents/study/pascal_compiler/src/lexer/classes.cpp"
 },
@@ -18,5 +23,10 @@
   "directory": "/home/pna/Documents/study/pascal_compiler/build",
   "command": "/usr/bin/g++  -I/home/pna/Documents/study/pascal_compiler/src -I/home/pna/Documents/study/pascal_compiler/include -g -o CMakeFiles/compilier.dir/src/lexer/lexer.cpp.o -c /home/pna/Documents/study/pascal_compiler/src/lexer/lexer.cpp",
   "file": "/home/pna/Documents/study/pascal_compiler/src/lexer/lexer.cpp"
+},
+{
+  "directory": "/home/pna/Documents/study/pascal_compiler/build",
+  "command": "/usr/bin/g++  -I/home/pna/Documents/study/pascal_compiler/src -I/home/pna/Documents/study/pascal_compiler/include -g -o CMakeFiles/compilier.dir/src/compilier/compilier.cpp.o -c /home/pna/Documents/study/pascal_compiler/src/compilier/compilier.cpp",
+  "file": "/home/pna/Documents/study/pascal_compiler/src/compilier/compilier.cpp"
 }
 ]

@@ -33,7 +33,7 @@ std::unique_ptr<CToken> CLexer::GetNextToken(){
     return std::make_unique<CConstToken>(lexem.second, lexem.first);
 }
 
-int main(){
+void test(){
     auto Lexer = std::make_unique<CLexer>("/home/pna/Documents/study/pascal_compiler/input.txt", "/home/pna/Documents/study/pascal_compiler/output.txt");
     
     auto t = Lexer->GetNextToken();

@@ -129,6 +129,54 @@ compilier/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/compilier.dir/build.make CMakeFiles/compilier.dir/build
 .PHONY : compilier/fast
 
+src/compilier/compilier.o: src/compilier/compilier.cpp.o
+.PHONY : src/compilier/compilier.o
+
+# target to build an object file
+src/compilier/compilier.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/compilier.dir/build.make CMakeFiles/compilier.dir/src/compilier/compilier.cpp.o
+.PHONY : src/compilier/compilier.cpp.o
+
+src/compilier/compilier.i: src/compilier/compilier.cpp.i
+.PHONY : src/compilier/compilier.i
+
+# target to preprocess a source file
+src/compilier/compilier.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/compilier.dir/build.make CMakeFiles/compilier.dir/src/compilier/compilier.cpp.i
+.PHONY : src/compilier/compilier.cpp.i
+
+src/compilier/compilier.s: src/compilier/compilier.cpp.s
+.PHONY : src/compilier/compilier.s
+
+# target to generate assembly for a file
+src/compilier/compilier.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/compilier.dir/build.make CMakeFiles/compilier.dir/src/compilier/compilier.cpp.s
+.PHONY : src/compilier/compilier.cpp.s
+
+src/exceptions/exceptions.o: src/exceptions/exceptions.cpp.o
+.PHONY : src/exceptions/exceptions.o
+
+# target to build an object file
+src/exceptions/exceptions.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/compilier.dir/build.make CMakeFiles/compilier.dir/src/exceptions/exceptions.cpp.o
+.PHONY : src/exceptions/exceptions.cpp.o
+
+src/exceptions/exceptions.i: src/exceptions/exceptions.cpp.i
+.PHONY : src/exceptions/exceptions.i
+
+# target to preprocess a source file
+src/exceptions/exceptions.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/compilier.dir/build.make CMakeFiles/compilier.dir/src/exceptions/exceptions.cpp.i
+.PHONY : src/exceptions/exceptions.cpp.i
+
+src/exceptions/exceptions.s: src/exceptions/exceptions.cpp.s
+.PHONY : src/exceptions/exceptions.s
+
+# target to generate assembly for a file
+src/exceptions/exceptions.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/compilier.dir/build.make CMakeFiles/compilier.dir/src/exceptions/exceptions.cpp.s
+.PHONY : src/exceptions/exceptions.cpp.s
+
 src/inout/classes.o: src/inout/classes.cpp.o
 .PHONY : src/inout/classes.o
 
@@ -234,6 +282,12 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... compilier"
+	@echo "... src/compilier/compilier.o"
+	@echo "... src/compilier/compilier.i"
+	@echo "... src/compilier/compilier.s"
+	@echo "... src/exceptions/exceptions.o"
+	@echo "... src/exceptions/exceptions.i"
+	@echo "... src/exceptions/exceptions.s"
 	@echo "... src/inout/classes.o"
 	@echo "... src/inout/classes.i"
 	@echo "... src/inout/classes.s"

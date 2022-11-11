@@ -97,10 +97,24 @@ CMakeFiles/compilier.dir/src/inout/inout.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/compilier.dir/src/inout/inout.cpp.s"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/pna/Documents/study/pascal_compiler/src/inout/inout.cpp -o CMakeFiles/compilier.dir/src/inout/inout.cpp.s
 
+CMakeFiles/compilier.dir/src/exceptions/exceptions.cpp.o: CMakeFiles/compilier.dir/flags.make
+CMakeFiles/compilier.dir/src/exceptions/exceptions.cpp.o: /home/pna/Documents/study/pascal_compiler/src/exceptions/exceptions.cpp
+CMakeFiles/compilier.dir/src/exceptions/exceptions.cpp.o: CMakeFiles/compilier.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pna/Documents/study/pascal_compiler/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/compilier.dir/src/exceptions/exceptions.cpp.o"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/compilier.dir/src/exceptions/exceptions.cpp.o -MF CMakeFiles/compilier.dir/src/exceptions/exceptions.cpp.o.d -o CMakeFiles/compilier.dir/src/exceptions/exceptions.cpp.o -c /home/pna/Documents/study/pascal_compiler/src/exceptions/exceptions.cpp
+
+CMakeFiles/compilier.dir/src/exceptions/exceptions.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/compilier.dir/src/exceptions/exceptions.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/pna/Documents/study/pascal_compiler/src/exceptions/exceptions.cpp > CMakeFiles/compilier.dir/src/exceptions/exceptions.cpp.i
+
+CMakeFiles/compilier.dir/src/exceptions/exceptions.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/compilier.dir/src/exceptions/exceptions.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/pna/Documents/study/pascal_compiler/src/exceptions/exceptions.cpp -o CMakeFiles/compilier.dir/src/exceptions/exceptions.cpp.s
+
 CMakeFiles/compilier.dir/src/lexer/classes.cpp.o: CMakeFiles/compilier.dir/flags.make
 CMakeFiles/compilier.dir/src/lexer/classes.cpp.o: /home/pna/Documents/study/pascal_compiler/src/lexer/classes.cpp
 CMakeFiles/compilier.dir/src/lexer/classes.cpp.o: CMakeFiles/compilier.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pna/Documents/study/pascal_compiler/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/compilier.dir/src/lexer/classes.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pna/Documents/study/pascal_compiler/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/compilier.dir/src/lexer/classes.cpp.o"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/compilier.dir/src/lexer/classes.cpp.o -MF CMakeFiles/compilier.dir/src/lexer/classes.cpp.o.d -o CMakeFiles/compilier.dir/src/lexer/classes.cpp.o -c /home/pna/Documents/study/pascal_compiler/src/lexer/classes.cpp
 
 CMakeFiles/compilier.dir/src/lexer/classes.cpp.i: cmake_force
@@ -114,7 +128,7 @@ CMakeFiles/compilier.dir/src/lexer/classes.cpp.s: cmake_force
 CMakeFiles/compilier.dir/src/lexer/lexer.cpp.o: CMakeFiles/compilier.dir/flags.make
 CMakeFiles/compilier.dir/src/lexer/lexer.cpp.o: /home/pna/Documents/study/pascal_compiler/src/lexer/lexer.cpp
 CMakeFiles/compilier.dir/src/lexer/lexer.cpp.o: CMakeFiles/compilier.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pna/Documents/study/pascal_compiler/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/compilier.dir/src/lexer/lexer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pna/Documents/study/pascal_compiler/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/compilier.dir/src/lexer/lexer.cpp.o"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/compilier.dir/src/lexer/lexer.cpp.o -MF CMakeFiles/compilier.dir/src/lexer/lexer.cpp.o.d -o CMakeFiles/compilier.dir/src/lexer/lexer.cpp.o -c /home/pna/Documents/study/pascal_compiler/src/lexer/lexer.cpp
 
 CMakeFiles/compilier.dir/src/lexer/lexer.cpp.i: cmake_force
@@ -125,23 +139,41 @@ CMakeFiles/compilier.dir/src/lexer/lexer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/compilier.dir/src/lexer/lexer.cpp.s"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/pna/Documents/study/pascal_compiler/src/lexer/lexer.cpp -o CMakeFiles/compilier.dir/src/lexer/lexer.cpp.s
 
+CMakeFiles/compilier.dir/src/compilier/compilier.cpp.o: CMakeFiles/compilier.dir/flags.make
+CMakeFiles/compilier.dir/src/compilier/compilier.cpp.o: /home/pna/Documents/study/pascal_compiler/src/compilier/compilier.cpp
+CMakeFiles/compilier.dir/src/compilier/compilier.cpp.o: CMakeFiles/compilier.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pna/Documents/study/pascal_compiler/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/compilier.dir/src/compilier/compilier.cpp.o"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/compilier.dir/src/compilier/compilier.cpp.o -MF CMakeFiles/compilier.dir/src/compilier/compilier.cpp.o.d -o CMakeFiles/compilier.dir/src/compilier/compilier.cpp.o -c /home/pna/Documents/study/pascal_compiler/src/compilier/compilier.cpp
+
+CMakeFiles/compilier.dir/src/compilier/compilier.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/compilier.dir/src/compilier/compilier.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/pna/Documents/study/pascal_compiler/src/compilier/compilier.cpp > CMakeFiles/compilier.dir/src/compilier/compilier.cpp.i
+
+CMakeFiles/compilier.dir/src/compilier/compilier.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/compilier.dir/src/compilier/compilier.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/pna/Documents/study/pascal_compiler/src/compilier/compilier.cpp -o CMakeFiles/compilier.dir/src/compilier/compilier.cpp.s
+
 # Object files for target compilier
 compilier_OBJECTS = \
 "CMakeFiles/compilier.dir/src/inout/classes.cpp.o" \
 "CMakeFiles/compilier.dir/src/inout/inout.cpp.o" \
+"CMakeFiles/compilier.dir/src/exceptions/exceptions.cpp.o" \
 "CMakeFiles/compilier.dir/src/lexer/classes.cpp.o" \
-"CMakeFiles/compilier.dir/src/lexer/lexer.cpp.o"
+"CMakeFiles/compilier.dir/src/lexer/lexer.cpp.o" \
+"CMakeFiles/compilier.dir/src/compilier/compilier.cpp.o"
 
 # External object files for target compilier
 compilier_EXTERNAL_OBJECTS =
 
 compilier: CMakeFiles/compilier.dir/src/inout/classes.cpp.o
 compilier: CMakeFiles/compilier.dir/src/inout/inout.cpp.o
+compilier: CMakeFiles/compilier.dir/src/exceptions/exceptions.cpp.o
 compilier: CMakeFiles/compilier.dir/src/lexer/classes.cpp.o
 compilier: CMakeFiles/compilier.dir/src/lexer/lexer.cpp.o
+compilier: CMakeFiles/compilier.dir/src/compilier/compilier.cpp.o
 compilier: CMakeFiles/compilier.dir/build.make
 compilier: CMakeFiles/compilier.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/pna/Documents/study/pascal_compiler/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable compilier"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/pna/Documents/study/pascal_compiler/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable compilier"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/compilier.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
