@@ -5,11 +5,8 @@
 class CCompilier
 {
 private:
-    std::unique_ptr<CLexer> lexer = nullptr;
     std::unique_ptr<CToken> token = nullptr;
     std::unique_ptr<CToken> GetNextToken();
-public:
-    CCompilier(const char * In, const char * Out="");
     void Accept(std::unique_ptr<CToken> expected_token);
     void ProgramBlock();                //Заголовок и точка
     void MainBlock();                   //Программа
@@ -25,4 +22,9 @@ public:
     void SimpleExpression();            //Простое выражение
     void Term();                        //Слагаемое
     void Multiplier();                  //Множитель
+    void ConditionalOperatorBlock();    //Условный оператор
+public:
+    std::unique_ptr<CLexer> lexer = nullptr;
+    CCompilier(const char * In, const char * Out="");
+    void Run();
 };

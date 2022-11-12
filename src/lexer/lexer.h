@@ -8,4 +8,5 @@ public:
     std::unique_ptr<InOutModule> InOut;
     CLexer(const char * In, const char * Out="");
     std::unique_ptr<CToken> GetNextToken();
+    void test();
 };

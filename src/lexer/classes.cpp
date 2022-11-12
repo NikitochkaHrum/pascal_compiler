@@ -51,7 +51,7 @@ std::map<OperatorType, std::string> from_operator_to_str = {
 };
 
 std::map<std::string, KeyWordType> from_str_to_kw = {
-    {"Program", ProgramKW},
+    {"program", ProgramKW},
     {"var", VarKW},
     {"if", IfKW},
     {"const", ConstKW},
@@ -71,7 +71,7 @@ std::map<std::string, KeyWordType> from_str_to_kw = {
 };
 
 std::map<KeyWordType, std::string> from_kw_to_str = {
-    {ProgramKW, "Program"},
+    {ProgramKW, "program"},
     {VarKW, "var"},
     {IfKW, "if"},
     {ConstKW, "const"},
@@ -100,16 +100,12 @@ CToken::CToken(){
     TextPos help;
     pos.char_number = help.char_number;
     pos.line_number = help.line_number;
-    tt = Constant;
+    // tt = Constant;
 }
 
-CConstToken::CConstToken(){
-    CConstToken("");
-}
+CConstToken::CConstToken() : CConstToken("") { }
 
-CConstToken::CConstToken(std::string lexem){
-    CConstToken(TextPos(), lexem);
-}
+CConstToken::CConstToken(std::string lexem) :  CConstToken(TextPos(), lexem) { }
 
 CConstToken::CConstToken(TextPos position, std::string lexem){
     tt = Constant;
@@ -141,13 +137,9 @@ std::string CConstToken::ToString(){
     return value->ToString();
 }
 
-CIdentToken::CIdentToken(){
-    CIdentToken(TextPos(), "");
-}
+CIdentToken::CIdentToken(): CIdentToken(TextPos(), "") { }
 
-CIdentToken::CIdentToken(std::string lexem){
-    CIdentToken(TextPos(), lexem);
-}
+CIdentToken::CIdentToken(std::string lexem) : CIdentToken(TextPos(), lexem) { }
 
 CIdentToken::CIdentToken(TextPos position, std::string lexem){
     tt = Identifier;
@@ -159,9 +151,7 @@ std::string CIdentToken::ToString(){
     return value;
 }
 
-CKeyWordToken::CKeyWordToken(std::string lexem){
-    CKeyWordToken(TextPos(), lexem);
-}
+CKeyWordToken::CKeyWordToken(std::string lexem) : CKeyWordToken(TextPos(), lexem) { }
 
 CKeyWordToken::CKeyWordToken(TextPos position, std::string lexem){
     tt = KeyWord;
@@ -173,13 +163,9 @@ std::string CKeyWordToken::ToString(){
     return from_kw_to_str[value];
 }
 
-COperatorToken::COperatorToken(){
-    COperatorToken("");
-}
+COperatorToken::COperatorToken() : COperatorToken(""){ }
 
-COperatorToken::COperatorToken(std::string lexem){
-    COperatorToken(TextPos(), lexem);
-}
+COperatorToken::COperatorToken(std::string lexem) : COperatorToken(TextPos(), lexem){  }
 
 COperatorToken::COperatorToken(TextPos position, std::string lexem){
     tt = Operator;
