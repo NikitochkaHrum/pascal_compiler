@@ -241,12 +241,12 @@ void CCompilier::ConditionalOperatorBlock(){
     Expression();
     Accept(std::make_unique<CKeyWordToken>("then"));
     Expression();
-    try{
-        Accept(std::make_unique<CKeyWordToken>("else"));
-    }
-    catch(CTokenExpectedException &e){
-        return;
-    }
+    // try{
+    Accept(std::make_unique<CKeyWordToken>("else"));
+    // }
+    // catch(CTokenExpectedException &e){
+    //     return;
+    // }
     Expression();
 }
 
