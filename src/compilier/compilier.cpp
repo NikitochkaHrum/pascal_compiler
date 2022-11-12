@@ -36,7 +36,175 @@ void CCompilier::Accept(std::unique_ptr<CToken> expected_token){
 
 void CCompilier::ProgramBlock(){
     Accept(std::make_unique<CKeyWordToken>("Program"));
+    Accept(std::make_unique<CIdentToken>());
+    Accept(std::make_unique<COperatorToken>(";"));
+    MainBlock();
     Accept(std::make_unique<COperatorToken>("."));
+}
+
+void CCompilier::MainBlock(){
+                                //TODO раздел меток
+    ConstBlock();               //Раздел констант
+                                //TODO Раздел типов
+    VarBlock();                 //Раздел переменных
+    CompositeOperatorBlock();   //Раздел процедур и функций, заменённый на раздел составного оператора
+                                //TODO Раздел операторов
+}
+
+void CCompilier::ConstBlock(){
+    try{
+        Accept(std::make_unique<CKeyWordToken>("Const"));
+    }
+    catch(CTokenExpectedException &e){
+        return;
+    }
+    Accept(std::make_unique<CIdentToken>());
+    Accept(std::make_unique<COperatorToken>("="));
+    Accept(std::make_unique<CConstToken>());
+    Accept(std::make_unique<COperatorToken>(";"));
+    while(true){
+        try{
+            Accept(std::make_unique<CIdentToken>());
+        }
+        catch(CTokenExpectedException &e){
+            break;
+        }
+        Accept(std::make_unique<COperatorToken>("="));
+        Accept(std::make_unique<CConstToken>());
+        Accept(std::make_unique<COperatorToken>(";"));
+    }
+}
+
+void CCompilier::VarBlock(){
+    try{
+        Accept(std::make_unique<CKeyWordToken>("Var"));
+    }
+    catch(CTokenExpectedException &e){
+        return;
+    }
+    SimilarVars(); //Раздел однотипных переменных
+    Accept(std::make_unique<COperatorToken>(";"));
+    while(true){
+        try{
+            SimilarVars();
+        }
+        catch(CTokenExpectedException &e){
+            break;
+        }
+        Accept(std::make_unique<COperatorToken>(";"));
+    }
+}
+
+void CCompilier::SimilarVars(){
+    Accept(std::make_unique<CIdentToken>());
+    while(true){
+        try{
+            Accept(std::make_unique<COperatorToken>(","));
+        }
+        catch(CTokenExpectedException &e){
+            break;
+        }
+        Accept(std::make_unique<CIdentToken>());
+    }
+}   
+
+void CCompilier::CompositeOperatorBlock(){
+    Accept(std::make_unique<CKeyWordToken>("Begin"));
+    OperatorBlock();
+    Accept(std::make_unique<COperatorToken>(";"));
+    while(true){
+        try{
+            OperatorBlock();
+        }
+        catch(CTokenExpectedException &e){
+            break;
+        }
+        Accept(std::make_unique<COperatorToken>(";"));
+    }
+    Accept(std::make_unique<CKeyWordToken>("End"));
+}
+
+void CCompilier::OperatorBlock(){
+    try{
+        SimpleOperatorBlock();
+    }
+    catch(CTokenExpectedException &e){
+        ComplicatedOperatorBlock();
+    }
+}
+
+void CCompilier::SimpleOperatorBlock(){
+    try{
+        AssignOperatorBlock();
+    }
+    catch(CTokenExpectedException &e){
+        return;
+    }
+}
+
+void CCompilier::AssignOperatorBlock(){
+    Accept(std::make_unique<CIdentToken>());
+    Accept(std::make_unique<COperatorToken>(":="));
+    Expression();
+}
+
+void CCompilier::Expression(){
+    SimpleExpression();
+    auto s = token->ToString();
+    if(s == "=" || s == "<>" || s == "<" || s=="<=" || s==">=" || s==">"){
+        Accept(std::make_unique<COperatorToken>(s));
+        SimpleExpression();
+    }
+}
+
+void CCompilier::SimpleExpression(){
+    try{
+        Accept(std::make_unique<COperatorToken>("+"));
+    }
+    catch(CTokenExpectedException &e){
+        Accept(std::make_unique<COperatorToken>("-"));
+    }
+    Term();
+    while(true){
+        auto s = token->ToString();
+        if(s=="+" || s=="-" || s=="or"){
+            Accept(std::make_unique<COperatorToken>(s));
+            Term();
+        }
+        else
+            break;
+    }
+}
+
+void CCompilier::Term(){
+    Multiplier();
+    while(true){
+        auto s = token->ToString();
+        if(s=="div" || s=="mod" || s=="and" || s=="*" || s=="/"){
+            Accept(std::make_unique<COperatorToken>(s));
+            Multiplier();
+        }
+        else
+            break;
+    }
+}
+
+void CCompilier::Multiplier(){
+    if(token->tt==Identifier){
+        Accept(std::make_unique<CIdentToken>());
+    }
+    else if(token->tt==Constant){
+        Accept(std::make_unique<CConstToken>());
+    }
+    else if(token->ToString()=="("){
+        Accept(std::make_unique<COperatorToken>("("));
+        Expression();
+        Accept(std::make_unique<COperatorToken>(")"));
+    }
+    else{
+        Accept(std::make_unique<COperatorToken>("not"));
+        Multiplier();
+    }
 }
 
 int main(){

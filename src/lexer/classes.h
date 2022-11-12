@@ -9,8 +9,13 @@
 
 enum TokenType {Constant, Identifier, KeyWord, Operator};
 enum VarType {IntegerType, FloatType, StringType, BoolType};
-enum KeyWordType {ProgramKW, VarKW, IfKW, ThenKW, ElseKW, ForKW, WhileKW, DoKW, BeginKW, EndKW, ReadKW, WriteKW, IntegerKW, FloatKW, ReadlnKW, WritelnKW};
-enum OperatorType {OType1, OType2, OType3, OType4, OType5, OType6, OType7, OType8, OType9, OType10, OType11, OType12, OType13, OType14};
+enum KeyWordType {ProgramKW, VarKW, IfKW, ConstKW, ThenKW,
+                ElseKW, ForKW, WhileKW, DoKW, BeginKW, EndKW,
+                ReadKW, WriteKW, IntegerKW, FloatKW, ReadlnKW, WritelnKW};
+enum OperatorType {OType1, OType2, OType3, OType4, OType5, OType6, OType7,
+                OType8, OType9, OType10, OType11, OType12, OType13, OType14,
+                OType15, OType16, OType17, OType18, OType19, OType20, OType21,
+                OType22};
 
 extern std::map<std::string, OperatorType> from_str_to_operator;
 extern std::map<OperatorType, std::string> from_operator_to_str;
@@ -34,6 +39,7 @@ class CConstToken : public CToken
 {
 public:
     std::unique_ptr<CVariant> value;
+    CConstToken();
     CConstToken(std::string lexem);
     CConstToken(TextPos position, std::string lexem);
     std::string ToString() override;
@@ -43,6 +49,7 @@ class CIdentToken : public CToken
 {
 public:
     std::string value;
+    CIdentToken();
     CIdentToken(std::string lexem);
     CIdentToken(TextPos position, std::string lexem);
     std::string ToString() override;
@@ -61,6 +68,7 @@ class COperatorToken : public CToken
 {
 public:
     OperatorType value;
+    COperatorToken();
     COperatorToken(std::string lexem);
     COperatorToken(TextPos position, std::string lexem);
     std::string ToString() override;

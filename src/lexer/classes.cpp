@@ -14,7 +14,15 @@ std::map<std::string, OperatorType> from_str_to_operator = {
     {",", OType11},
     {"(", OType12},
     {")", OType13},
-    {".", OType14}
+    {".", OType14},
+    {"<>", OType15},
+    {"<", OType16},
+    {">", OType17},
+    {"<=", OType18},
+    {">=", OType19},
+    {"or", OType20},
+    {"and", OType21},
+    {"not", OType22}
 };
 
 std::map<OperatorType, std::string> from_operator_to_str = {
@@ -31,13 +39,22 @@ std::map<OperatorType, std::string> from_operator_to_str = {
     {OType11, ","},
     {OType12, "("},
     {OType13, ")"},
-    {OType14, "."}
+    {OType14, "."},
+    {OType15, "<>"},
+    {OType16, "<"},
+    {OType17, ">"},
+    {OType18, "<="},
+    {OType19, ">="},
+    {OType20, "or"},
+    {OType21, "and"},
+    {OType22, "not"}
 };
 
 std::map<std::string, KeyWordType> from_str_to_kw = {
     {"Program", ProgramKW},
     {"var", VarKW},
     {"if", IfKW},
+    {"const", ConstKW},
     {"then", ThenKW},
     {"else", ElseKW},
     {"for", ForKW},
@@ -57,6 +74,7 @@ std::map<KeyWordType, std::string> from_kw_to_str = {
     {ProgramKW, "Program"},
     {VarKW, "var"},
     {IfKW, "if"},
+    {ConstKW, "const"},
     {ThenKW, "then"},
     {ElseKW, "else"},
     {ForKW, "for"},
@@ -83,6 +101,10 @@ CToken::CToken(){
     pos.char_number = help.char_number;
     pos.line_number = help.line_number;
     tt = Constant;
+}
+
+CConstToken::CConstToken(){
+    CConstToken("");
 }
 
 CConstToken::CConstToken(std::string lexem){
@@ -119,6 +141,10 @@ std::string CConstToken::ToString(){
     return value->ToString();
 }
 
+CIdentToken::CIdentToken(){
+    CIdentToken(TextPos(), "");
+}
+
 CIdentToken::CIdentToken(std::string lexem){
     CIdentToken(TextPos(), lexem);
 }
@@ -145,6 +171,10 @@ CKeyWordToken::CKeyWordToken(TextPos position, std::string lexem){
 
 std::string CKeyWordToken::ToString(){
     return from_kw_to_str[value];
+}
+
+COperatorToken::COperatorToken(){
+    COperatorToken("");
 }
 
 COperatorToken::COperatorToken(std::string lexem){
