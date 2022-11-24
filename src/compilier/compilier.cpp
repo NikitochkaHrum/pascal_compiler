@@ -56,32 +56,24 @@ void CCompilier::ProgramBlock(){
 }
 
 void CCompilier::MainBlock(){
-                                //TODO раздел меток
-    ConstBlock();               //Раздел констант
-                                //TODO Раздел типов
-    VarBlock();                 //Раздел переменных
-    CompositeOperatorBlock();   //Раздел процедур и функций, заменённый на раздел составного оператора
-                                //TODO Раздел операторов
+                                     //TODO раздел меток
+    if(token->ToString() == from_kw_to_str[ConstKW])
+        ConstBlock();                //Раздел констант
+                                     //TODO Раздел типов
+    if(token->ToString() == from_kw_to_str[VarKW])
+        VarBlock();                  //Раздел переменных
+    CompositeOperatorBlock();        //Раздел процедур и функций, заменённый на раздел составного оператора
+                                     //TODO Раздел операторов
 }
 
 void CCompilier::ConstBlock(){
-    try{
-        Accept(std::make_unique<CKeyWordToken>("const"));
-    }
-    catch(CTokenExpectedException &e){
-        return;
-    }
+    Accept(std::make_unique<CKeyWordToken>("const"));
     Accept(std::make_unique<CIdentToken>());
     Accept(std::make_unique<COperatorToken>("="));
     Accept(std::make_unique<CConstToken>());
     Accept(std::make_unique<COperatorToken>(";"));
-    while(true){
-        try{
-            Accept(std::make_unique<CIdentToken>());
-        }
-        catch(CTokenExpectedException &e){
-            break;
-        }
+    while(token->tt==Identifier){
+        Accept(std::make_unique<CIdentToken>());
         Accept(std::make_unique<COperatorToken>("="));
         Accept(std::make_unique<CConstToken>());
         Accept(std::make_unique<COperatorToken>(";"));
@@ -89,12 +81,7 @@ void CCompilier::ConstBlock(){
 }
 
 void CCompilier::VarBlock(){
-    try{
-        Accept(std::make_unique<CKeyWordToken>("var"));
-    }
-    catch(CTokenExpectedException &e){
-        return;
-    }
+    Accept(std::make_unique<CKeyWordToken>("var"));
 
     SimilarVars(); //Раздел однотипных переменных
     Accept(std::make_unique<COperatorToken>(";"));
@@ -112,7 +99,7 @@ void CCompilier::VarBlock(){
 
 void CCompilier::SimilarVars(){
     Accept(std::make_unique<CIdentToken>());
-    while(true){
+    while(token->ToString()==","){
         try{
             Accept(std::make_unique<COperatorToken>(","));
         }
