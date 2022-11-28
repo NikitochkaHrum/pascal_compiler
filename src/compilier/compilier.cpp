@@ -6,7 +6,12 @@ CCompilier::CCompilier(const char * In, const char * Out){
 
 void CCompilier::Run(){
     token = lexer->GetNextToken();
-    ProgramBlock();
+    // try{
+        ProgramBlock();
+    // }
+    // catch(CTokenExpectedException& exc){
+    //     std::cout << exc.what();
+    // }
 }
 
 std::unique_ptr<CToken> CCompilier::GetNextToken(){
@@ -20,6 +25,8 @@ void CCompilier::Accept(TokenType expected_token_type){
 }
 
 void CCompilier::Accept(OperatorType expected_operator){
+    if(token->tt!=Operator)
+        throw CTokenExpectedException(Operator, token->pos);;
     auto our = static_cast<COperatorToken*>(token.get());
     if(our->value!=expected_operator)
         throw CTokenExpectedException(Operator, token->pos);
@@ -27,6 +34,8 @@ void CCompilier::Accept(OperatorType expected_operator){
 }
 
 void CCompilier::Accept(KeyWordType expected_keyword){
+    if(token->tt!=KeyWord)
+        throw CTokenExpectedException(KeyWord, token->pos);;
     auto our = static_cast<CKeyWordToken*>(token.get());
     if(our->value!=expected_keyword)
         throw CTokenExpectedException(KeyWord, token->pos);
@@ -34,6 +43,8 @@ void CCompilier::Accept(KeyWordType expected_keyword){
 }
 
 void CCompilier::Accept(VarType expected_var_type){
+    if(token->tt!=Constant)
+        throw CTokenExpectedException(Constant, token->pos);;
     auto our = static_cast<CConstToken*>(token.get());
     if(our->value->vt!=expected_var_type)
         throw CTokenExpectedException(Constant, token->pos);
@@ -197,6 +208,6 @@ void CCompilier::ConditionalOperatorBlock(){
 }
 
 int main(){
-    auto compilier = std::make_unique<CCompilier>("/home/pna/Documents/study/pascal_compiler/input.txt", "/home/pna/Documents/study/pascal_compiler/output.txt");
+    auto compilier = std::make_unique<CCompilier>("/home/pna/Documents/study/pascal_compiler/input.txt");
     compilier->Run();
 }
