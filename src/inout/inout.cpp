@@ -2,7 +2,8 @@
 
 InOutModule::InOutModule(const char * In, const char * Out){
     freopen(In, "r", stdin);
-    if(Out!="")
+
+    if(Out[0]!='\0')
         freopen(Out, "w", stdout);
     cur="";
     idx=0;

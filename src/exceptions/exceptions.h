@@ -3,9 +3,9 @@
 
 class CTokenExpectedException : public std::exception {
 private:
-    char * msg;
+    std::string msg;
 public:
     CTokenExpectedException();
     CTokenExpectedException(TokenType tt, TextPos position);
-    char * what();
+    std::string what();
 };

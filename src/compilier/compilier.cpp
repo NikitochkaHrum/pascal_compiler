@@ -6,12 +6,12 @@ CCompilier::CCompilier(const char * In, const char * Out){
 
 void CCompilier::Run(){
     token = lexer->GetNextToken();
-    // try{
+    try{
         ProgramBlock();
-    // }
-    // catch(CTokenExpectedException& exc){
-    //     std::cout << exc.what();
-    // }
+    }
+    catch(CTokenExpectedException& exc){
+        std::cout << exc.what();
+    }
 }
 
 std::unique_ptr<CToken> CCompilier::GetNextToken(){
