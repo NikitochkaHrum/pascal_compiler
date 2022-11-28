@@ -7,7 +7,10 @@ class CCompilier
 private:
     std::unique_ptr<CToken> token = nullptr;
     std::unique_ptr<CToken> GetNextToken();
-    void Accept(std::unique_ptr<CToken> expected_token);
+    void Accept(TokenType expected_token_type);
+    void Accept(OperatorType expected_operator);
+    void Accept(KeyWordType expected_keyword);
+    void Accept(VarType expected_var_type);
     void ProgramBlock();                //Заголовок и точка
     void MainBlock();                   //Программа
     void ConstBlock();                  //Раздел констант
