@@ -66,7 +66,54 @@ std::pair<std::string, TextPos> InOutModule::GetNextLex(){
             }
             continue;
         }
-        if(s[idx]==' ' || s[idx]==';' || s[idx]==',' || s[idx]=='\t' || s[idx]=='\n' || s[idx]=='(' || s[idx]==')'){
+        if(s[idx]=='<'){
+            if(cur!=""){
+                auto ans = std::make_pair(cur, pos);
+                cur="";
+                return ans;
+            }
+            cur="<";
+            pos.char_number=idx;
+            if(idx==s.length()-1 || s[idx+1]!='>'){
+                auto ans = std::make_pair(std::string(1, s[idx]), pos);
+                cur="";
+                idx++;
+                return ans;
+            }
+            continue;
+        }
+        if(s[idx]=='>'){
+            if(cur=="<"){
+                cur+=s[idx];
+                auto ans = std::make_pair(cur, pos);
+                idx++;
+                cur="";
+                return ans;
+            }
+            else{
+                auto ans = std::make_pair(std::string(1, s[idx]), TextPos(pos.line_number, idx));
+                idx++;
+                cur="";
+                return ans;
+            }
+        }
+        
+        if(s[idx]=='='){
+            if(cur==">" || cur=="<" || cur==":"){
+                cur+=s[idx];
+                auto ans = std::make_pair(cur, pos);
+                idx++;
+                cur="";
+                return ans;
+            }
+            else{
+                auto ans = std::make_pair(std::string(1, s[idx]), TextPos(pos.line_number, idx));
+                idx++;
+                cur="";
+                return ans;
+            }
+        }
+        if(s[idx]==' ' || s[idx]==';' || s[idx]==',' || s[idx]=='\t' || s[idx]=='\n' || s[idx]=='(' || s[idx]==')' || s[idx]=='+' || s[idx]=='-' || s[idx]=='*' || s[idx]=='/'){
             if(cur!=""){
                 auto ans = std::make_pair(cur, pos);
                 cur="";
@@ -79,6 +126,13 @@ std::pair<std::string, TextPos> InOutModule::GetNextLex(){
             }
             continue;
         }
+        // if(idx && (s[idx-1]=='=' || s[idx-1]=='>' || s[idx-1]=='<' || s[idx-1]=='+' || s[idx-1]=='-')){
+        //     if(cur!=""){
+        //         auto ans = std::make_pair(cur, pos);
+        //         cur="";
+        //         return ans;
+        //     }
+        // }
         if(cur==""){
             pos.char_number=idx;
         }

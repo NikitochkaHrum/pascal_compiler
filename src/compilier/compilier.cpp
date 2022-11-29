@@ -208,6 +208,6 @@ void CCompilier::ConditionalOperatorBlock(){
 }
 
 int main(){
-    auto compilier = std::make_unique<CCompilier>("/home/pna/Documents/study/pascal_compiler/input.txt");
+    auto compilier = std::make_unique<CCompilier>("/home/pna/Documents/study/pascal_compiler/input.txt", "/home/pna/Documents/study/pascal_compiler/output.txt");
     compilier->Run();
 }
