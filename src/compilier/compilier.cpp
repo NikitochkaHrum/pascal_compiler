@@ -22,6 +22,10 @@ std::unique_ptr<CToken> CCompilier::GetNextToken(){
 void CCompilier::Accept(TokenType expected_token_type){
     if(token->tt!=expected_token_type)
         throw CTokenExpectedException(expected_token_type, token->pos);
+    if(expected_token_type==Operator){
+        last_op = from_str_to_operator[token->ToString()];
+        last_pos_of_op[last_op] = token->pos;
+    }
     token = GetNextToken();
 }
 
@@ -31,6 +35,8 @@ void CCompilier::Accept(OperatorType expected_operator){
     auto our = static_cast<COperatorToken*>(token.get());
     if(our->value!=expected_operator)
         throw CTokenExpectedException(Operator, token->pos);
+    last_op = expected_operator;
+    last_pos_of_op[expected_operator] = token->pos;
     token = GetNextToken();
 }
 
@@ -52,7 +58,7 @@ void CCompilier::Accept(VarType expected_var_type){
     token = GetNextToken();
 }
 
-void CCompilier::add_var(std::string& name, VarType type)
+void CCompilier::Add_var(std::string& name, VarType type)
 {
 	if (vars.find(name) == vars.end())
 		vars[name] = type;
@@ -62,7 +68,7 @@ void CCompilier::add_var(std::string& name, VarType type)
 	}
 }
 
-VarType CCompilier::derive (VarType left, VarType right, OperatorType last_operation, TextPos pos_for_error){
+VarType CCompilier::Derive (VarType left, VarType right, OperatorType op, TextPos pos_for_error){
     VarType res = DefaultType;
     if(can_cast(left, right))
         res = right;
@@ -72,15 +78,15 @@ VarType CCompilier::derive (VarType left, VarType right, OperatorType last_opera
     
 	if (res == StringType) {
 		// только +, =, <>
-		if (last_operation != from_str_to_operator["+"] && last_operation != from_str_to_operator["="] && from_str_to_operator["<>"]) {
+		if (op != from_str_to_operator["+"] && op != from_str_to_operator["="] && op!=from_str_to_operator["<>"]) {
 			std::string error_text = "Данную операцию нельзя применить к этим операндам";
 			handler->add_error(error_text, pos_for_error);
 		}
 	}
-
-	if (last_operation == from_str_to_operator["="] || last_operation == from_str_to_operator["<>"] || last_operation == from_str_to_operator[">="] ||
-		last_operation == from_str_to_operator["<="] || from_str_to_operator[">"] || last_operation == from_str_to_operator["<"] ||
-		last_operation == from_str_to_operator["or"] || from_str_to_operator["and"])
+    // операции сравнения
+	if (op == from_str_to_operator["="] || op == from_str_to_operator["<>"] || op == from_str_to_operator[">="] ||
+		op == from_str_to_operator["<="] || op == from_str_to_operator[">"] || op == from_str_to_operator["<"] ||
+		op == from_str_to_operator["or"] || op == from_str_to_operator["and"])
 		return BoolType;
 	return res;
 }
@@ -152,28 +158,23 @@ void CCompilier::SimilarVars(){
     {
     case IntegerKW:
         my_type = IntegerType;
-        Accept(IntegerType);
         break;
     case FloatKW:
         my_type = FloatType;
-        Accept(FloatType);
         break;
     case StringKW:
         my_type = StringType;
-        Accept(StringType);
         break;
     case BoolKW:
         my_type = BoolType;
-        Accept(BoolType);
         break;
     default:
         my_type = DefaultType;
-        Accept(DefaultType);
         break;
     }
-
+    Accept(my_type_kw);
     for(auto v: vs){
-        add_var(v, my_type);
+        Add_var(v, my_type);
     }
 }   
 
@@ -202,40 +203,62 @@ void CCompilier::SimpleOperatorBlock(){
 }
 
 void CCompilier::AssignOperatorBlock(){
+    TextPos ident_pos = token->pos;
+    std::string ident = token->ToString();
     Accept(Identifier);
     Accept(from_str_to_operator[":="]);
-    Expression();
-}
-
-void CCompilier::Expression(){
-    SimpleExpression();
-    auto s = token->ToString();
-    if(s == "=" || s == "<>" || s == "<" || s=="<=" || s==">=" || s==">"){
-        Accept(from_str_to_operator[s]);
-        SimpleExpression();
+    VarType expr_type = Expression();
+    if (vars.find(ident) == vars.end()) {
+		std::string error_text = "Переменная не была объявлена";
+		handler->add_error(error_text, ident_pos);
+	}
+    else if (!can_cast(expr_type, vars[ident])) {
+        // TODO: вывод ошибки
+        std::string error_text = "Вычисленное выражение и переменная имеют разные типы";
+        handler->add_error(error_text, last_pos_of_op[from_str_to_operator[":="]]);
     }
 }
 
-void CCompilier::SimpleExpression(){
+VarType CCompilier::Expression(){
+    VarType t1 = SimpleExpression(), t2;
+    auto s = token->ToString();
+    if(s == "=" || s == "<>" || s == "<" || s=="<=" || s==">=" || s==">"){
+        OperatorType cur_op = from_str_to_operator[s];
+        Accept(cur_op);
+        t2 = SimpleExpression();
+		t1 = Derive(t1, t2, cur_op, last_pos_of_op[cur_op]);
+    }
+    return t1;
+}
+
+VarType CCompilier::SimpleExpression(){
     if(token->ToString() == "+" || token->ToString() == "-"){
         Accept(from_str_to_operator[token->ToString()]);
     }
-    Term();
-    while(token->ToString()=="+" || token->ToString()=="-" || token->ToString()=="or"){
-        Accept(Operator);
-        Term();
+    VarType t1 = Term(), t2;
+    auto s = token->ToString();
+    while(s=="+" || s=="-" || s=="or"){
+        OperatorType cur_op = from_str_to_operator[s];
+        Accept(cur_op);
+        t2 = Term();
+        t1 = Derive(t1, t2, cur_op, last_pos_of_op[cur_op]);
     }
+    return t1;
 }
 
-void CCompilier::Term(){
-    Multiplier();
-    while(token->ToString()=="div" || token->ToString()=="mod" || token->ToString()=="and" || token->ToString()=="*" || token->ToString()=="/"){
-        Accept(Operator);
-        Multiplier();
+VarType CCompilier::Term(){
+    VarType t1 = Multiplier(), t2;
+    auto s = token->ToString();
+    while(s=="div" || s=="mod" || s=="and" || token->ToString()=="*" || token->ToString()=="/"){
+        OperatorType cur_op = from_str_to_operator[s];
+        Accept(cur_op);
+        t2 = Multiplier();
+        t1 = Derive(t1, t2, cur_op, last_pos_of_op[cur_op]);
     }
+    return t1;
 }
 
-void CCompilier::Multiplier(){
+VarType CCompilier::Multiplier(){
     if(token->tt==Identifier){
         Accept(Identifier);
     }

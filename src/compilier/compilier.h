@@ -7,6 +7,8 @@ class CCompilier
 {
 private:
     std::map<std::string, VarType> vars;
+    std::map<OperatorType, TextPos> last_pos_of_op;
+    OperatorType last_op;
     std::unique_ptr<CToken> token = nullptr;
     std::unique_ptr<ErrorHandler> handler = nullptr;
     std::unique_ptr<CToken> GetNextToken();
@@ -14,8 +16,10 @@ private:
     void Accept(OperatorType expected_operator);
     void Accept(KeyWordType expected_keyword);
     void Accept(VarType expected_var_type);
-    void add_var(std::string& name, VarType type);
-    VarType derive (VarType left, VarType right, OperatorType last_operation, TextPos pos_for_error);
+    void Add_var(std::string& name, VarType type);
+    VarType Derive (VarType left, VarType right, OperatorType last_operation, TextPos pos_for_error);
+
+    // БНФ
     void ProgramBlock();                //Заголовок и точка
     void MainBlock();                   //Программа
     void ConstBlock();                  //Раздел констант
@@ -26,10 +30,10 @@ private:
     void SimpleOperatorBlock();         //Простой оператор
     void ComplicatedOperatorBlock();    //Сложный оператор
     void AssignOperatorBlock();         //Оператор присваивания
-    void Expression();                  //Выражение
-    void SimpleExpression();            //Простое выражение
-    void Term();                        //Слагаемое
-    void Multiplier();                  //Множитель
+    VarType Expression();               //Выражение
+    VarType SimpleExpression();         //Простое выражение
+    VarType Term();                     //Слагаемое
+    VarType Multiplier();               //Множитель
     void ConditionalOperatorBlock();    //Условный оператор
 public:
     std::unique_ptr<CLexer> lexer = nullptr;
