@@ -8,10 +8,10 @@
 // }
 
 enum TokenType {Constant, Identifier, KeyWord, Operator};
-enum VarType {IntegerType, FloatType, StringType, BoolType};
+enum VarType {DefaultType, IntegerType, FloatType, StringType, BoolType};
 enum KeyWordType {ProgramKW, VarKW, IfKW, ConstKW, ThenKW,
                 ElseKW, ForKW, WhileKW, DoKW, BeginKW, EndKW,
-                ReadKW, WriteKW, IntegerKW, FloatKW, ReadlnKW, WritelnKW};
+                ReadKW, WriteKW, IntegerKW, FloatKW, StringKW, BoolKW, ReadlnKW, WritelnKW};
 enum OperatorType {OType1, OType2, OType3, OType4, OType5, OType6, OType7,
                 OType8, OType9, OType10, OType11, OType12, OType13, OType14,
                 OType15, OType16, OType17, OType18, OType19, OType20, OType21,
@@ -23,6 +23,8 @@ extern std::map<std::string, KeyWordType> from_str_to_kw;
 extern std::map<KeyWordType, std::string> from_kw_to_str;
 
 std::string make_low(std::string a);
+
+bool can_cast(VarType from, VarType to);
 
 class CVariant;
 

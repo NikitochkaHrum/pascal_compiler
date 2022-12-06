@@ -2,6 +2,7 @@
 
 CCompilier::CCompilier(const char * In, const char * Out){
     lexer = std::make_unique<CLexer>(In, Out);
+    handler = std::make_unique<ErrorHandler>();
 }
 
 void CCompilier::Run(){
@@ -51,6 +52,39 @@ void CCompilier::Accept(VarType expected_var_type){
     token = GetNextToken();
 }
 
+void CCompilier::add_var(std::string& name, VarType type)
+{
+	if (vars.find(name) == vars.end())
+		vars[name] = type;
+	else {
+        std::string msg = "Переменная с именем `" + name + "` уже была объявлена";
+		handler->add_error(msg, token->pos);
+	}
+}
+
+VarType CCompilier::derive (VarType left, VarType right, OperatorType last_operation, TextPos pos_for_error){
+    VarType res = DefaultType;
+    if(can_cast(left, right))
+        res = right;
+    
+    if(can_cast(right, left))
+        res = left;
+    
+	if (res == StringType) {
+		// только +, =, <>
+		if (last_operation != from_str_to_operator["+"] && last_operation != from_str_to_operator["="] && from_str_to_operator["<>"]) {
+			std::string error_text = "Данную операцию нельзя применить к этим операндам";
+			handler->add_error(error_text, pos_for_error);
+		}
+	}
+
+	if (last_operation == from_str_to_operator["="] || last_operation == from_str_to_operator["<>"] || last_operation == from_str_to_operator[">="] ||
+		last_operation == from_str_to_operator["<="] || from_str_to_operator[">"] || last_operation == from_str_to_operator["<"] ||
+		last_operation == from_str_to_operator["or"] || from_str_to_operator["and"])
+		return BoolType;
+	return res;
+}
+
 void CCompilier::ProgramBlock(){
     Accept(ProgramKW);
     Accept(Identifier);
@@ -97,18 +131,50 @@ void CCompilier::VarBlock(){
 }
 
 void CCompilier::SimilarVars(){
+    std::vector<std::string> vs;
+    vs.push_back(token->ToString());
     Accept(Identifier);
+
     while(token->ToString()==","){
         Accept(from_str_to_operator[","]);
+        vs.push_back(token->ToString());
         Accept(Identifier);
     }
     Accept(from_str_to_operator[":"]);
-
+    if(token->tt!=KeyWord){
+        Accept(KeyWord);
+        return;
+    }
     auto our = static_cast<CKeyWordToken*>(token.get());
-    if(our->value!=IntegerKW)
-        Accept(FloatKW);
-    else
-        Accept(IntegerKW);
+    auto my_type_kw = our->value;
+    VarType my_type;
+    switch (my_type_kw)
+    {
+    case IntegerKW:
+        my_type = IntegerType;
+        Accept(IntegerType);
+        break;
+    case FloatKW:
+        my_type = FloatType;
+        Accept(FloatType);
+        break;
+    case StringKW:
+        my_type = StringType;
+        Accept(StringType);
+        break;
+    case BoolKW:
+        my_type = BoolType;
+        Accept(BoolType);
+        break;
+    default:
+        my_type = DefaultType;
+        Accept(DefaultType);
+        break;
+    }
+
+    for(auto v: vs){
+        add_var(v, my_type);
+    }
 }   
 
 void CCompilier::CompositeOperatorBlock(){

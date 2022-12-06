@@ -65,7 +65,9 @@ std::map<std::string, KeyWordType> from_str_to_kw = {
     {"read", ReadKW},
     {"write", WriteKW},
     {"integer", IntegerKW},
-    {"float", FloatKW},
+    {"real", FloatKW},
+    {"string", StringKW},
+    {"bool", BoolKW},
     {"readln", ReadlnKW},
     {"writeln", WritelnKW}
 };
@@ -85,15 +87,21 @@ std::map<KeyWordType, std::string> from_kw_to_str = {
     {ReadKW, "read"},
     {WriteKW, "write"},
     {IntegerKW, "integer"},
-    {FloatKW, "float"},
+    {FloatKW, "real"},
+    {StringKW, "string"},
+    {BoolKW, "bool"},
     {ReadlnKW, "readln"},
     {WritelnKW, "writeln"}
 };
 
-
 std::string make_low(std::string a){
     std::transform(a.begin(), a.end(), a.begin(), [](unsigned char c){ return std::tolower(c); });
     return a;
+}
+
+bool can_cast(VarType from, VarType to){
+    return to==DefaultType || from==to || from==IntegerType && to==FloatType
+        || from==BoolType && to!=StringType;
 }
 
 CToken::CToken(){
