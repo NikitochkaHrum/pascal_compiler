@@ -11,8 +11,9 @@ void CCompilier::Run(){
         ProgramBlock();
     }
     catch(CTokenExpectedException& exc){
-        std::cout << exc.what();
+        std::cout << exc.what() << "\n\n";
     }
+    lexer->InOut->print_semantic_errors(*handler.get());
 }
 
 std::unique_ptr<CToken> CCompilier::GetNextToken(){
@@ -101,8 +102,8 @@ void CCompilier::ProgramBlock(){
 
 void CCompilier::MainBlock(){
                                      //TODO раздел меток
-    if(token->ToString() == from_kw_to_str[ConstKW])
-        ConstBlock();                //Раздел констант
+    // if(token->ToString() == from_kw_to_str[ConstKW])
+        // ConstBlock();                //Раздел констант
                                      //TODO Раздел типов
     if(token->ToString() == from_kw_to_str[VarKW])
         VarBlock();                  //Раздел переменных
@@ -110,19 +111,19 @@ void CCompilier::MainBlock(){
     CompositeOperatorBlock();        //Раздел операторов
 }
 
-void CCompilier::ConstBlock(){
-    Accept(ConstKW);
-    Accept(Identifier);
-    Accept(from_str_to_operator["="]);
-    Accept(Constant);
-    Accept(from_str_to_operator[";"]);
-    while(token->tt==Identifier){
-        Accept(Identifier);
-        Accept(from_str_to_operator["="]);
-        Accept(Constant);
-        Accept(from_str_to_operator[";"]);
-    }
-}
+// void CCompilier::ConstBlock(){
+//     Accept(ConstKW);
+//     Accept(Identifier);
+//     Accept(from_str_to_operator["="]);
+//     Accept(Constant);
+//     Accept(from_str_to_operator[";"]);
+//     while(token->tt==Identifier){
+//         Accept(Identifier);
+//         Accept(from_str_to_operator["="]);
+//         Accept(Constant);
+//         Accept(from_str_to_operator[";"]);
+//     }
+// }
 
 void CCompilier::VarBlock(){
     Accept(VarKW);
@@ -227,6 +228,7 @@ VarType CCompilier::Expression(){
         Accept(cur_op);
         t2 = SimpleExpression();
 		t1 = Derive(t1, t2, cur_op, last_pos_of_op[cur_op]);
+        s=token->ToString();
     }
     return t1;
 }
@@ -242,6 +244,7 @@ VarType CCompilier::SimpleExpression(){
         Accept(cur_op);
         t2 = Term();
         t1 = Derive(t1, t2, cur_op, last_pos_of_op[cur_op]);
+        s=token->ToString();
     }
     return t1;
 }
@@ -254,25 +257,43 @@ VarType CCompilier::Term(){
         Accept(cur_op);
         t2 = Multiplier();
         t1 = Derive(t1, t2, cur_op, last_pos_of_op[cur_op]);
+        s = token->ToString();
     }
     return t1;
 }
 
 VarType CCompilier::Multiplier(){
+    std::string ident = token->ToString();
+	TextPos mem_pos = token->pos;
     if(token->tt==Identifier){
         Accept(Identifier);
+        if (vars.find(ident) == vars.end()){
+			std::string error_text = "Переменная не была объявлена";
+		    handler->add_error(error_text, mem_pos);
+			return DefaultType;
+		}
+		return vars[ident];
     }
     else if(token->tt==Constant){
+        auto our = static_cast<CConstToken*>(token.get());
+        // не кастится vt
         Accept(Constant);
+        return our->value->vt;
     }
     else if(token->ToString()=="("){
         Accept(from_str_to_operator["("]);
-        Expression();
+        auto ans = Expression();
         Accept(from_str_to_operator[")"]);
+        return ans;
     }
     else{
         Accept(from_str_to_operator["not"]);
-        Multiplier();
+        auto go = Expression();
+        if (!can_cast(go, BoolType)) {
+			std::string error_text = "Выражение должно иметь тип Bool";
+			handler->add_error(error_text, last_pos_of_op[from_str_to_operator["not"]]);
+		}
+        return BoolType;
     }
 }
 

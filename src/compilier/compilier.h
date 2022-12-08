@@ -22,7 +22,7 @@ private:
     // БНФ
     void ProgramBlock();                //Заголовок и точка
     void MainBlock();                   //Программа
-    void ConstBlock();                  //Раздел констант
+    // void ConstBlock();                  //Раздел констант
     void VarBlock();                    //Раздел переменных
     void SimilarVars();                 //Однотипные переменных
     void CompositeOperatorBlock();      //Составной оператор (begin, end)

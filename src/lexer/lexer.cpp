@@ -37,11 +37,11 @@ void CLexer::test(){
     auto t = GetNextToken();
     while(t){
         switch(t->tt){
-            std::cout << t->ToString() << '\n';
+            // std::cout << t->ToString() << '\n';
             case Constant:{
-                std::cout << "\tConstant on pos " << t->pos.line_number << ' ' << t->pos.char_number << '\n';
-                std::cout << "\tVar Type = ";
                 auto help = static_cast<CConstToken*>(t.get());
+                std::cout << "\tConstant " << help->ToString() << " on pos " << t->pos.line_number << ' ' << t->pos.char_number << '\n';
+                std::cout << "\tVar Type = ";
                 switch (help->value->vt){
                 case IntegerType:{
                     std::cout << "Int\n";
@@ -52,7 +52,7 @@ void CLexer::test(){
                     break;
                 }
                 case StringType:{
-                    std::cout << "Int\n";
+                    std::cout << "String\n";
                     break;
                 }
                 case BoolType:{
@@ -65,15 +65,18 @@ void CLexer::test(){
                 break;
             }
             case Identifier:{
-                std::cout << "\tIdentifier on pos " << t->pos.line_number << ' ' << t->pos.char_number << "\n\n";
+                auto help = static_cast<CIdentToken*>(t.get());
+                std::cout << "\tIdentifier " << help->ToString() << " on pos " << t->pos.line_number << ' ' << t->pos.char_number << "\n\n";
                 break;
             }
             case KeyWord:{
-                std::cout << "\tKeyWord on pos " << t->pos.line_number << ' ' << t->pos.char_number << "\n\n";
+                auto help = static_cast<CKeyWordToken*>(t.get());
+                std::cout << "\tKeyWord " << help->ToString() << " on pos " << t->pos.line_number << ' ' << t->pos.char_number << "\n\n";
                 break;
             }
             case Operator:{
-                std::cout << "\tOperator on pos " << t->pos.line_number << ' ' << t->pos.char_number << "\n\n";
+                auto help = static_cast<CKeyWordToken*>(t.get());
+                std::cout << "\tOperator " << help->ToString() << " on pos " << t->pos.line_number << ' ' << t->pos.char_number << "\n\n";
                 break;
             }
         }

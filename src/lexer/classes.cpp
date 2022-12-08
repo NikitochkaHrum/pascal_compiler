@@ -118,24 +118,25 @@ CConstToken::CConstToken(std::string lexem) :  CConstToken(TextPos(), lexem) { }
 CConstToken::CConstToken(TextPos position, std::string lexem){
     tt = Constant;
     pos = position;
-    int x1;
-    float x2;
-    try {
-        x2 = stof(lexem);
-        value = std::make_unique<CFloatVariant>(x2);
+    int cnt_c=0, cnt_p=0;
+    bool is_num=lexem[0] >='0' && lexem[0]<='9';
+    for(auto symb: lexem){
+        if(symb>='0' && symb<='9')
+            cnt_c++;
+        else if(symb=='.')
+            cnt_p++;
+    }
+    if(cnt_p==0 && is_num && cnt_c==lexem.length()){
+        value = std::make_unique<CIntVariant>(stoi(lexem));
         return;
     }
-    catch(std::invalid_argument& e){ }
-    try {
-        x1 = stoi(lexem);
-        value = std::make_unique<CIntVariant>(x1);
+    else if(cnt_p==1 && is_num && cnt_c==lexem.length()-1){
+        value = std::make_unique<CFloatVariant>(stof(lexem));
         return;
     }
-    catch(std::invalid_argument& e){ }
     std::string help = make_low(lexem);
     if(help=="true" || help=="false"){
-        bool what = help=="true";
-        value = std::make_unique<CBoolVariant>(what);
+        value = std::make_unique<CBoolVariant>(help=="true");
     }
     else
         value = std::make_unique<CStringVariant>(lexem);

@@ -9,6 +9,7 @@ include_directories(
 add_executable(compilier  src/inout/classes.cpp
                           src/inout/inout.cpp
                           src/exceptions/exceptions.cpp
+                          src/exceptions/error_handler.cpp
                           src/lexer/classes.cpp
                           src/lexer/lexer.cpp
                           src/compilier/compilier.cpp

@@ -83,6 +83,11 @@ std::pair<std::string, TextPos> InOutModule::GetNextLex(){
             continue;
         }
         if(s[idx]=='>'){
+            if(cur!="" && cur!="<"){
+                auto ans = std::make_pair(cur, pos);
+                cur="";
+                return ans;
+            }
             if(cur=="<"){
                 cur+=s[idx];
                 auto ans = std::make_pair(cur, pos);
@@ -90,12 +95,11 @@ std::pair<std::string, TextPos> InOutModule::GetNextLex(){
                 cur="";
                 return ans;
             }
-            else{
-                auto ans = std::make_pair(std::string(1, s[idx]), TextPos(pos.line_number, idx));
-                idx++;
-                cur="";
-                return ans;
-            }
+            pos.char_number=idx;
+            auto ans = std::make_pair(std::string(1, s[idx]), pos);
+            idx++;
+            cur="";
+            return ans;
         }
         
         if(s[idx]=='='){
@@ -150,4 +154,11 @@ std::pair<std::string, TextPos> InOutModule::GetNextLex(){
     if(have_ans)
         return ans;
     return this->GetNextLex();
+}
+
+void InOutModule::print_semantic_errors(ErrorHandler h){
+    auto my_errors = h.get_errors();
+    for(auto e: my_errors){
+        std::cout << "Info: " << e.info << "\n\tPos: " << e.pos.line_number+1 << ' ' << e.pos.char_number+1 << "\n\n";
+    }
 }
