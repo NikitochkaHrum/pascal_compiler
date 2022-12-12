@@ -185,7 +185,7 @@ void CCompilier::CompositeOperatorBlock(){
     Accept(from_str_to_operator[";"]);
 
     while(token->tt==Identifier || token->ToString()=="begin"
-         || token->ToString()=="if"){
+         || token->ToString()=="if" || token->ToString()=="while"){
         OperatorBlock();
         Accept(from_str_to_operator[";"]);
     }
@@ -195,7 +195,7 @@ void CCompilier::CompositeOperatorBlock(){
 void CCompilier::OperatorBlock(){
     if(token->tt==Identifier)
         SimpleOperatorBlock();
-    else if(token->ToString()=="begin" || token->ToString()=="if")
+    else if(token->ToString()=="begin" || token->ToString()=="if" || token->ToString()=="while")
         ComplicatedOperatorBlock();
 }
 
@@ -301,8 +301,11 @@ void CCompilier::ComplicatedOperatorBlock(){
     if(token->ToString()=="begin"){
         CompositeOperatorBlock();
     }
-    else{ // if block
+    else if(token->ToString()=="if"){ // if block
         ConditionalOperatorBlock();
+    }
+    else{ // while block
+        WhileBlock();
     }
 }
 
@@ -315,6 +318,13 @@ void CCompilier::ConditionalOperatorBlock(){
         Accept(ElseKW);
         OperatorBlock();
     }
+}
+
+void CCompilier::WhileBlock(){
+    Accept(WhileKW);
+    Expression();
+    Accept(DoKW);
+    OperatorBlock();
 }
 
 int main(){

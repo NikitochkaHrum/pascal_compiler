@@ -11,6 +11,7 @@ InOutModule::InOutModule(const char * In, const char * Out){
     pos.char_number=0;
     pos.line_number=0;
     ready = getline(std::cin, s) ? true : false;
+    strs.push_back(s);
 }
 
 std::pair<std::string, TextPos> InOutModule::GetNextLex(){
@@ -151,6 +152,7 @@ std::pair<std::string, TextPos> InOutModule::GetNextLex(){
     idx=0;
     pos.line_number++;
     ready = getline(std::cin, s) ? true : false;
+    strs.push_back(s);
     if(have_ans)
         return ans;
     return this->GetNextLex();
@@ -159,6 +161,10 @@ std::pair<std::string, TextPos> InOutModule::GetNextLex(){
 void InOutModule::print_semantic_errors(ErrorHandler h){
     auto my_errors = h.get_errors();
     for(auto e: my_errors){
-        std::cout << "Info: " << e.info << "\n\tPos: " << e.pos.line_number+1 << ' ' << e.pos.char_number+1 << "\n\n";
+        std::cout << "Error: " << e.info << "\nв строке "<<
+            e.pos.line_number+1 << ":\n" << strs[e.pos.line_number] << '\n';
+        std::string help(strs[e.pos.line_number].length(), ' ');
+        help[e.pos.char_number] = '^';
+        std::cout << help << "\n\n";
     }
 }

@@ -35,6 +35,7 @@ private:
     VarType Term();                     //Слагаемое
     VarType Multiplier();               //Множитель
     void ConditionalOperatorBlock();    //Условный оператор
+    void WhileBlock();                  //Цикл с предусловием
 public:
     std::unique_ptr<CLexer> lexer = nullptr;
     CCompilier(const char * In, const char * Out="");

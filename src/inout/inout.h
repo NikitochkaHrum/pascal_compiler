@@ -11,6 +11,7 @@ public:
     void print_semantic_errors(ErrorHandler h);
 private:
     std::string s, cur;
+    std::vector<std::string> strs;
     TextPos pos;
     int idx, comment;
 };
